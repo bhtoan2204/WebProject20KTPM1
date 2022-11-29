@@ -5,7 +5,7 @@ const contactController = require('../app/controllers/ContactController');
 
 //newsController.index;
 
-router.get('/customers/contact' , contactController.show);
+router.get('/contact' , contactController.show);
 
 router.get('/', contactController.index);
 

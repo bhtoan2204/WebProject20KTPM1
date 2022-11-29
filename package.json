@@ -1,53 +1,22 @@
 {
-  
-  "name": "first-app",
-  
+  "name": "webproject20ktpm1",
   "version": "1.0.0",
-  
   "description": "",
-  
-  "main": "src/app.js",
-  
+  "main": "index.js",
   "scripts": {
-  
-    
-  "start": "nodemon --inspect src/app.js",
-  
-    
-  "listen": "node-sass --watch src/resource/scss/ -0 src/public/css/",
-  
-    
-  "test": "echo \"Error: no test specified\" && exit 1"
-  
+    "admin.install": "cd apps/admin && npm i",
+    "admin.start": "cd apps/admin && npm run start",
+    "customer.install": "cd apps/customer && npm i",
+    "customer.start": "cd apps/customer && npm run start"
   },
-  
-  "author": "toan hao",
-  
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mjkundta/WebProject20KTPM1.git"
+  },
+  "author": "",
   "license": "ISC",
-  
-  "dependencies": {
-  
-    
-  "express": "^4.18.2",
-  
-    
-  "express-handlebars": "^6.0.6",
-  
-    
-  "sequelize": "^6.25.8"
-  
+  "bugs": {
+    "url": "https://github.com/mjkundta/WebProject20KTPM1/issues"
   },
-  
-  "devDependencies": {
-  
-    
-  "morgan": "^1.10.0",
-  
-    
-  "node-sass": "^8.0.0",
-  
-    
-  "nodemon": "^2.0.20"
-  
-  }
+  "homepage": "https://github.com/mjkundta/WebProject20KTPM1#readme"
 }

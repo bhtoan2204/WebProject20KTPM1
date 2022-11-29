@@ -1,3 +1,4 @@
+const ContactController = require('../app/controllers/ContactController');
 const siteRouter = require('./site');
 const contactRouter = require('./contact');
 const compareRouter = require('./compair');
@@ -17,7 +18,7 @@ const homeRouter = require('./home');
 
 function route(app) {
 
-    app.use('/customers/contact', contactRouter);
+    app.use('/contact', contactRouter);
     app.use('/compair', compareRouter);
     app.use('/components', componentsRouter);
     app.use('/faq', faqRouter);

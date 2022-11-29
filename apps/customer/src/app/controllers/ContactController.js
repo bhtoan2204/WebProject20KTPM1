@@ -1,7 +1,7 @@
 class ContactController{
     // [GET] /news
     index(req, res){
-        res.render('customers/contact')
+        res.render('contact')
     }
 
     show(req, res){
