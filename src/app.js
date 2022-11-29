@@ -16,10 +16,10 @@ app.use(express.json());
 app.use(morgan('combined'));
 
 // template engine
-app.engine('handlebars', hbs.engine())
+app.engine('handlebars', hbs.engine());
 app.set('view engine', 'handlebars');
-app.set('views', path.join(__dirname, 'resource', 'views'));
+app.set('views', path.join(__dirname, 'resource', 'views', 'customers'));
 
 route(app);
 
-app.listen(port, () => {})
+app.listen(port, () => {});
