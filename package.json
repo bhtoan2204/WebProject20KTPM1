@@ -7,7 +7,8 @@
     "admin.install": "cd apps/admin && npm i",
     "admin.start": "cd apps/admin && npm run start",
     "customer.install": "cd apps/customer && npm i",
-    "customer.start": "cd apps/customer && npm run start"
+    "customer.start": "cd apps/customer && npm run start",
+    "customer.start:dev": "cd apps/customer && npm run start:dev"
   },
   "repository": {
     "type": "git",
