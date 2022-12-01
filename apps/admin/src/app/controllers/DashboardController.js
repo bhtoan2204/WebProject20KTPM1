@@ -1,11 +1,11 @@
 class CompairController{
     // [GET] /news
     index(req, res){
-        res.render('compair')
+        res.render('home')
     }
 
     show(req, res){
-        res.send('Compair');
+        res.send('Home');
     }
 }
 

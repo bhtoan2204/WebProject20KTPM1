@@ -1,11 +1,11 @@
 class ContactController{
     // [GET] /news
     index(req, res){
-        res.render('contact')
+        res.render('error404')
     }
 
     show(req, res){
-        res.send('Contact');
+        res.send('Error404');
     }
 }
 

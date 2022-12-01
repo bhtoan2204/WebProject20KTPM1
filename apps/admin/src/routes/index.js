@@ -1,40 +1,30 @@
-const ContactController = require('../app/controllers/ContactController');
-const siteRouter = require('./site');
-const contactRouter = require('./contact');
-const compareRouter = require('./compair');
-const componentsRouter = require('./components');
-const faqRouter = require('./faq');
+const staticRouter = require('./static');
+const dashboardRouter = require('./dashboard');
 const forgetPassRouter = require('./forgetpass');
-const legalNoticeRouter = require('./legal_notice');
 const loginRouter = require('./login');
-const normalRouter = require('./normal');
-const productDetailsRouter = require('./product_details');
-const productSummaryRouter = require('./product_summary');
-const productsRouter = require('./product');
 const registerRouter = require('./register');
-const specialOfferRouter = require('./special_offer');
-const tacRouter = require('./tac');
 const homeRouter = require('./home');
+const lightRouter = require('./light');
+const error401Router = require('./error401');
+const error404Router = require('./error404');
+const error500Router = require('./error500');
+const chartRouter = require('./chart');
+const tableRouter = require('./table');
 
 function route(app) {
 
-    app.use('/contact', contactRouter);
-    app.use('/compair', compareRouter);
-    app.use('/components', componentsRouter);
-    app.use('/faq', faqRouter);
+    app.use('/static', staticRouter);
+    app.use('/light', lightRouter);
+    app.use('/dashboard', dashboardRouter);
     app.use('/forgetpass', forgetPassRouter);
-    app.use('/legal_notice', legalNoticeRouter);
     app.use('/login', loginRouter);
-    app.use('/normal', normalRouter);
-    app.use('/product_details', productDetailsRouter);
-    app.use('/product_summary', productSummaryRouter);
-    app.use('/products', productsRouter);
     app.use('/register', registerRouter);
-    app.use('/special_offer', specialOfferRouter);
-    app.use('/tac', tacRouter);
     app.use('/home', homeRouter);
-    app.use('/', siteRouter);
-
+    app.use('/error401', error401Router);
+    app.use('/error404', error404Router);
+    app.use('/error500', error500Router);
+    app.use('/chart', chartRouter);
+    app.use('/table', tableRouter);
 }
 
 module.exports = route;
