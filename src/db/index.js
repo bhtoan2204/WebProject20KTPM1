@@ -1,3 +1,4 @@
+// get the client
 const mysql = require('mysql2/promise');
 
 const db = {connection: null};
