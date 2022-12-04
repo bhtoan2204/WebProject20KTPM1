@@ -20,5 +20,6 @@ router.use('/product_summary', adminController.product_summary);
 router.use('/special_offer', adminController.special_offer);
 router.use('/tac', adminController.tac);
 router.use('/products', adminController.products);
+router.use('/products:slug/', adminController.search);
 
 module.exports = router;
