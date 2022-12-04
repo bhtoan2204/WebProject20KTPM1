@@ -1,6 +1,5 @@
 class customerController{
     // [GET] /news
-    
     compair(req, res){
         res.render('customer/compair', {layout: 'customer-main'})
     }
@@ -28,11 +27,8 @@ class customerController{
     normal(req, res){
         res.render('customer/normal', {layout: 'customer-main'})
     }
-    products(req, res){
-        res.render('customer/product_details', {layout: 'customer-main'})
-    }
     product_details(req, res){
-        res.render('customer/products', {layout: 'customer-main'})
+        res.render('customer/product_details', {layout: 'customer-main'})
     }
     product_summary(req, res){
         res.render('customer/product_summary', {layout: 'customer-main'})
