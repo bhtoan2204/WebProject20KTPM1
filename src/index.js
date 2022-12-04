@@ -4,9 +4,25 @@ const hbs = require('express-handlebars')
 const path = require('path');
 const route = require('./routes');
 const { mainModule } = require('process');
-
+const config = require('./config');
+const db = require('./config/database');
 // const Sequelize = require('sequelize');
 // const sequelize = new Sequelize('database', 'username', 'password');
+// async function connectToPostgres() {
+//     const sequelize = new Sequelize(config.db.options);
+//     try {
+//         await sequelize.authenticate();
+//         console.log('Connection has been established successfully.');
+//         return sequelize;
+//       } catch (error) {
+    //         console.error('Unable to connect to the database:', error);
+    //       }
+    // }
+// database
+db.authenticate()
+    .then(() => console.log('Database connected'))
+    .catch(error => console.log(error));
+
 const app = express();
 const port = 3000;
 
@@ -26,6 +42,7 @@ app.engine('handlebars', hbs.engine({
     partialsDir: __dirname + '/views/partials',
     defaultLayout: 'customer-main',
 }))
+
 
 route(app);
 
