@@ -5,8 +5,12 @@ exports.getAll = () => {
   return productRepository.getAll();
 }
 
-exports.filter = (name) => {
-  return productRepository.filter(name);
+exports.filter = (name, cat, sort) => {
+  return productRepository.filter(name, cat, sort);
 }
 
 exports.get = (id) => productRepository.get(id);
+
+exports.getNewest = () =>{
+  return productRepository.getNewest();
+}

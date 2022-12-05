@@ -19,9 +19,13 @@ class customerController {
     forgetpass(req, res) {
         res.render('customer/forgetpass', { layout: 'customer-main' })
     }
-    home(req, res) {
-        res.render('customer/home', { layout: 'customer-main' })
+    home = async (req, res) => {
+        const { name: nameFilter} = req.query;
+        let products = [];
+        products = await service.getNewest(nameFilter);
+        res.render('customer/home', { products});
     }
+
     legal_notice(req, res) {
         res.render('customer/legal_notice', { layout: 'customer-main' })
     }
@@ -31,10 +35,13 @@ class customerController {
     normal(req, res) {
         res.render('customer/normal', { layout: 'customer-main' })
     }
-    product_details(req, res) {
-        res.render('customer/product_details', { layout: 'customer-main' })
+    product_details = async (req, res, next) => {
+        const id_books = req.params['id_books'];
+        const product = await service.get(id_books);
+        if (!product) return next(createError(404));
+        res.render('customer/product_details', {product})
     }
-    product_summary(req, res) {
+    product_summary(req, res) { 
         res.render('customer/product_summary', { layout: 'customer-main' })
     }
     register(req, res) {
@@ -47,21 +54,21 @@ class customerController {
         res.render('customer/tac', { layout: 'customer-main' })
     }
     products = async (req, res) => {
-        const { name: nameFilter } = req.query;
+        const { name: nameFilter,
+                cat: catFilter,
+                sort: sortFilter} = req.query;
         let products = [];
-        if (nameFilter)
-            products = await service.filter(nameFilter);
-        else
+        if(nameFilter===''&&catFilter==='All'&&sortFilter==='' )
             products = await service.getAll();
+        else
+            products = await service.filter(nameFilter, catFilter, sortFilter);
         const { sort, ...withoutSort } = req.query;
+
+        console.log(req.query);
+
         res.render('customer/products', { products, originalUrl: `${req.baseUrl}?${qs.stringify(withoutSort)}` });
     }
-    search = async (req, res, next) => {
-        const { productId } = req.params;
-        const product = await productService.get(productId);
-        if (!product) return next(createError(404));
-        res.render('customer/products', {product});
-      };
+
 }
 
 module.exports = new customerController;

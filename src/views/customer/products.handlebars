@@ -49,7 +49,8 @@
                 </ul>
                 <br />
                 <div class="thumbnail">
-                    <img src="/customers/img/themes/images/products/panasonic.jpg" alt="Bootshop panasonoc New camera" />
+                    <img src="/customers/img/themes/images/products/panasonic.jpg"
+                        alt="Bootshop panasonoc New camera" />
                     <div class="caption">
                         <h5>Panasonic</h5>
                         <h4 style="text-align:center"><a class="btn" href="product_details"> <i
@@ -59,7 +60,8 @@
                     </div>
                 </div><br />
                 <div class="thumbnail">
-                    <img src="/customers/img/themes/images/products/kindle.png" title="Bootshop New Kindel" alt="Bootshop Kindel">
+                    <img src="/customers/img/themes/images/products/kindle.png" title="Bootshop New Kindel"
+                        alt="Bootshop Kindel">
                     <div class="caption">
                         <h5>Kindle</h5>
                         <h4 style="text-align:center"><a class="btn" href="product_details"> <i
@@ -80,18 +82,21 @@
             <div class="span9">
                 <hr class="soft" />
                 <form class="form-horizontal span6">
-                    <div class="control-group">
-                        <label class="control-label alignL">Sort By </label>
-                        <select>
-                            <option>Priduct name A - Z</option>
-                            <option>Priduct name Z - A</option>
-                            <option>Priduct Stoke</option>
-                            <option>Price Lowest first</option>
-                        </select>
+                    <div class="dropdown show">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropdown link
+                        </a>
+
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="{{originalUrl}}&sort=asc">A-Z</a>
+                            <a class="dropdown-item" href="{{originalUrl}}&sort=desc">Z-A</a>
+                            <a class="dropdown-item" href="{{originalUrl}}&sort=price">Lowest First</a>
+                        </div>
                     </div>
                 </form>
 
-                
+
                 <br class="clr" />
                 <div class="tab-content">
                     <div class="tab-pane" id="listView">
@@ -120,8 +125,7 @@
 
                                     <a href="product_details" class="btn btn-large btn-primary"> Add to <i
                                             class=" icon-shopping-cart"></i></a>
-                                    <a href="product_details" class="btn btn-large"><i
-                                            class="icon-zoom-in"></i></a>
+                                    <a href="product_details" class="btn btn-large"><i class="icon-zoom-in"></i></a>
 
                                 </form>
                             </div>
@@ -152,8 +156,7 @@
 
                                     <a href="product_details" class="btn btn-large btn-primary"> Add to <i
                                             class=" icon-shopping-cart"></i></a>
-                                    <a href="product_details" class="btn btn-large"><i
-                                            class="icon-zoom-in"></i></a>
+                                    <a href="product_details" class="btn btn-large"><i class="icon-zoom-in"></i></a>
 
                                 </form>
                             </div>
@@ -184,8 +187,7 @@
 
                                     <a href="product_details" class="btn btn-large btn-primary"> Add to <i
                                             class=" icon-shopping-cart"></i></a>
-                                    <a href="product_details" class="btn btn-large"><i
-                                            class="icon-zoom-in"></i></a>
+                                    <a href="product_details" class="btn btn-large"><i class="icon-zoom-in"></i></a>
 
                                 </form>
                             </div>
@@ -216,8 +218,7 @@
 
                                     <a href="product_details" class="btn btn-large btn-primary"> Add to <i
                                             class=" icon-shopping-cart"></i></a>
-                                    <a href="product_details" class="btn btn-large"><i
-                                            class="icon-zoom-in"></i></a>
+                                    <a href="product_details" class="btn btn-large"><i class="icon-zoom-in"></i></a>
 
                                 </form>
                             </div>
@@ -248,8 +249,7 @@
                                     </label><br />
                                     <a href="product_details" class="btn btn-large btn-primary"> Add to <i
                                             class=" icon-shopping-cart"></i></a>
-                                    <a href="product_details" class="btn btn-large"><i
-                                            class="icon-zoom-in"></i></a>
+                                    <a href="product_details" class="btn btn-large"><i class="icon-zoom-in"></i></a>
                                 </form>
                             </div>
                         </div>
@@ -279,8 +279,7 @@
 
                                     <a href="product_details" class="btn btn-large btn-primary"> Add to <i
                                             class=" icon-shopping-cart"></i></a>
-                                    <a href="product_details" class="btn btn-large"><i
-                                            class="icon-zoom-in"></i></a>
+                                    <a href="product_details" class="btn btn-large"><i class="icon-zoom-in"></i></a>
 
                                 </form>
                             </div>
@@ -293,7 +292,7 @@
                             {{#each products}}
                             <li class="span3">
                                 <div class="thumbnail">
-                                    <a href="product_details"><img src="{{url_img}}" width="900" alt=""/></a>
+                                    <a href="product_details/{{id_books}}"><img src="{{url_img}}" width="900" alt="" /></a>
                                     <div class="caption">
                                         <h5>{{name}}</h5>
                                         <p>
