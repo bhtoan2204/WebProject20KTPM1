@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 04, 2022 at 01:26 PM
+-- Generation Time: Dec 05, 2022 at 10:38 AM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -39,7 +39,14 @@ CREATE TABLE `authors` (
 INSERT INTO `authors` (`id_authors`, `name_authors`) VALUES
 (1, 'J.K.Rowling'),
 (2, 'Josh Malerman'),
-(3, 'Gege Akutami');
+(3, 'Gege Akutami'),
+(4, 'Nguyễn Nhật Ánh'),
+(5, 'Thomas Harris'),
+(6, 'Stephen King'),
+(7, 'Clint Emerson '),
+(8, 'Nguyễn Trung Trực'),
+(9, 'Đoàn Công Thúc'),
+(10, 'Thiên Hạ Bá Xướng');
 
 -- --------------------------------------------------------
 
@@ -65,13 +72,41 @@ CREATE TABLE `books` (
 INSERT INTO `books` (`id_books`, `name`, `author_id`, `publisher_id`, `release_year`, `price`, `description`, `url_img`) VALUES
 (1, 'Jujutsu no Kaisen', 3, 1, 2018, 1200, 'Jujutsu Kaisen is the story of Yuji Itadori. Mysterious world created by Akutami', '/customers/img/themes/images/products/1.jpg'),
 (2, 'Harry Potter', 1, 2, 2018, 30, 'Boxset Harry Potter - Tiếng Việt (Trọn Bộ 7 Tập)', '/customers/img/themes/images/products/2.jpg'),
-(3, 'Sherlock Holmes', NULL, 1, 2006, 600, 'Sherlock Holmes is a fictional detective of the late 19th and early 20th centuries, who first appeared in publication in 1887.', '/customers/img/themes/images/products/3.jpg'),
-(4, 'The silence of the Lambs', NULL, 1, 2017, 800, 'A young F.B.I. cadet must receive the help of an incarcerated', '/customers/img/themes/images/products/4.jpg'),
-(5, 'The Shining', NULL, 1, 2011, 700, 'A family heads to an isolated hotel for the winter where a sinister presence influences the father into violence.', '/customers/img/themes/images/products/5.jpg'),
-(6, 'Mắt Biếc', NULL, 2, 1999, 200, 'Mắt biếc là tiểu thuyết của nhà văn Nguyễn Nhật Ánh trong loạt truyện viết về tình yêu thanh thiếu niên', '/customers/img/themes/images/products/6.jpg'),
-(7, '100 Kỹ năng sinh tồn', NULL, 1, 2020, 50, 'CUỐN CẨM NANG HƯỚNG DẪN VỀ CÁCH SỐNG SÓT Ở NƠI HOANG DÃ VÀ CHUẨN BỊ CHO MỌI THẢM HỌA', '/customers/img/themes/images/products/7.jpg'),
-(8, 'Kỹ thuật lập trình', NULL, 2, 2003, 200, 'Giáo trình kỹ thuật lập trình C căn bản và nâng cao được hình thành qua nhiều năm giảng dạy của các tác giả', '/customers/img/themes/images/products/8.jpg'),
-(9, 'Pháp Luật đại cương', NULL, 1, 2017, 45, 'Cuốn sách được biên soạn nhằm cung cấp cho sinh viên và những người muốn tìm hiểu thêm về pháp luật những tri thức pháp lý cơ bản về nhà nước và pháp luật', '/customers/img/themes/images/products/9.jpg');
+(3, 'Sherlock Holmes', 2, 1, 2006, 600, 'Sherlock Holmes is a fictional detective of the late 19th and early 20th centuries.', '/customers/img/themes/images/products/3.jpg'),
+(4, 'The silence of the Lambs', 5, 1, 2017, 800, 'A young F.B.I. cadet must receive the help of an incarcerated', '/customers/img/themes/images/products/4.jpg'),
+(5, 'The Shining', 6, 1, 2011, 700, 'A family heads to an isolated hotel for the winte', '/customers/img/themes/images/products/5.jpg'),
+(6, 'Mắt Biếc', 4, 2, 1999, 200, 'Mắt biếc là tiểu thuyết của Nguyễn Nhật Ánh trong loạt truyện về tình yêu thanh thiếu niên', '/customers/img/themes/images/products/6.jpg'),
+(7, '100 Kỹ năng sinh tồn', 7, 4, 2020, 50, 'CUỐN CẨM NANG HƯỚNG DẪN VỀ CÁCH SỐNG SÓT Ở NƠI HOANG DÃ VÀ CHUẨN BỊ CHO MỌI THẢM HỌA', '/customers/img/themes/images/products/7.jpg'),
+(8, 'Kỹ thuật lập trình', 8, 5, 2003, 200, 'Giáo trình kỹ thuật lập trình C căn bản và nâng cao được hình thành qua nhiều năm giảng dạy của các tác giả', '/customers/img/themes/images/products/8.jpg'),
+(9, 'Pháp Luật đại cương', 9, 5, 2017, 45, 'Cuốn sách được biên soạn nhằm cung cấp cho sinh viên và những người muốn tìm hiểu về pháp luật tri thức pháp lý', '/customers/img/themes/images/products/9.jpg'),
+(10, 'Ma thổi đèn', 10, 2, 2006, 718, 'Ma thổi đèn (tiếng Trung: 鬼吹灯; bính âm: Guǐ Chuī Dēng, Hán-Việt: Quỷ xuy đăng) là một bộ truyện tám tập của Trung Quốc do tác giả Thiên Hạ Bá Xướng (Trương Mục Dã) viết.', '/customers/img/themes/images/products/10.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `book_type`
+--
+
+CREATE TABLE `book_type` (
+  `id_books` int(11) NOT NULL,
+  `id_categories` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `book_type`
+--
+
+INSERT INTO `book_type` (`id_books`, `id_categories`) VALUES
+(1, 1),
+(10, 5),
+(2, 6),
+(3, 6),
+(4, 6),
+(5, 6),
+(6, 6),
+(8, 7),
+(9, 7),
+(7, 8);
 
 -- --------------------------------------------------------
 
@@ -93,7 +128,10 @@ INSERT INTO `categories` (`id_categories`, `name_categories`) VALUES
 (2, 'Romance'),
 (3, 'Fantasy'),
 (4, 'Scifi'),
-(5, 'Horror');
+(5, 'Horror'),
+(6, 'Novel'),
+(7, 'Documentary'),
+(8, 'Nonfiction');
 
 -- --------------------------------------------------------
 
@@ -135,7 +173,11 @@ CREATE TABLE `order_item_lists` (
 --
 
 INSERT INTO `order_item_lists` (`order_id`, `quantity`, `book_id`) VALUES
-(1, 1, 2);
+(1, 1, 2),
+(2, 1, 1),
+(3, 2, 5),
+(4, 2, 7),
+(5, 2, 9);
 
 -- --------------------------------------------------------
 
@@ -174,7 +216,10 @@ CREATE TABLE `publishers` (
 
 INSERT INTO `publishers` (`id_publishers`, `name_publishers`) VALUES
 (1, 'Nhà xuất bản trẻ'),
-(2, 'Nhà xuất bản kim đồng');
+(2, 'Nhà xuất bản kim đồng'),
+(3, 'Nhà xuất bản văn học'),
+(4, 'Nhà xuất bản thanh niên'),
+(5, 'Nhà xuất bản Đại Học Quốc Gia TP.HCM');
 
 -- --------------------------------------------------------
 
@@ -218,6 +263,13 @@ ALTER TABLE `books`
   ADD PRIMARY KEY (`id_books`),
   ADD KEY `fk_books_authors_idx` (`author_id`),
   ADD KEY `fk_books_publishers_idx` (`publisher_id`);
+
+--
+-- Indexes for table `book_type`
+--
+ALTER TABLE `book_type`
+  ADD PRIMARY KEY (`id_books`,`id_categories`),
+  ADD KEY `fk_id_categories_idx` (`id_categories`);
 
 --
 -- Indexes for table `categories`
@@ -264,8 +316,21 @@ ALTER TABLE `users`
 -- Constraints for table `books`
 --
 ALTER TABLE `books`
-  ADD CONSTRAINT `fk_books_authors` FOREIGN KEY (`author_id`) REFERENCES `authors` (`id_authors`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_books_publishers` FOREIGN KEY (`publisher_id`) REFERENCES `publishers` (`id_publishers`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_books_authors` FOREIGN KEY (`author_id`) REFERENCES `authors` (`id_authors`),
+  ADD CONSTRAINT `fk_books_publishers` FOREIGN KEY (`publisher_id`) REFERENCES `publishers` (`id_publishers`);
+
+--
+-- Constraints for table `book_type`
+--
+ALTER TABLE `book_type`
+  ADD CONSTRAINT `fk_id_book` FOREIGN KEY (`id_books`) REFERENCES `books` (`id_books`),
+  ADD CONSTRAINT `fk_id_categories` FOREIGN KEY (`id_categories`) REFERENCES `categories` (`id_categories`);
+
+--
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `fk_create_by` FOREIGN KEY (`create_by`) REFERENCES `users` (`id_users`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
