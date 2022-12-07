@@ -10,11 +10,26 @@ router.get('/', async (req, res, next) => {
     try {
         const { name: nameFilter, cat: catFilter, sort: sortFilter } = req.query;
         let products = [];
-        if (!nameFilter&&!sortFilter&&catFilter==='All') {
-            products = await bookService.getAllBooks();
-        } else {
-            products = await bookService.getAllBooks();
-            console.log('all books: ', products);
+        if(sortFilter===''){
+            if(nameFilter === '' && catFilter === '0'){
+                products = await bookService.getAllBooks();
+                console.log(products);
+            }
+            else if(nameFilter === '' && catFilter != '0'){
+                products = await bookService.getBooksByCategoryId(catFilter);
+                console.log(products);
+            }
+            else if(this.name != '' && catFilter === '0'){
+                products = await bookService.searchBook(req.query);
+                console.log(products);
+            }
+            else{
+                products = await bookService.getFiltedBooks(nameFilter, catFilter);
+                console.log(products);
+            }
+        }
+        else{
+
         }
         const { sort, ...withoutSort } = req.query;
         res.render('customer/products', { products, originalUrl: `${req.baseUrl}?${qs.stringify(withoutSort)}` });

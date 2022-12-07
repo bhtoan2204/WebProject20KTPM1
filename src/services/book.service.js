@@ -13,6 +13,52 @@ const bookService = {
         })
     },
 
+    getFiltedBooks: (name, cat) =>{
+        return new Promise(async (resolve, reject) =>{
+            try{
+                const books = Book.findAll({
+                    where: {
+                        $and: [
+                            {
+                                title: {
+                                    $substring: name
+                                }
+                            },
+                            {
+                                categoryId: (query.cat == 0) ?
+                                    { $ne: null } :
+                                    { $eq: cat }
+                            }
+                        ]
+                    },
+                    raw: true
+                    }) ;
+                return resolve(books);
+            }
+            catch(error){
+                return reject(error);
+            }
+        })
+    },
+
+    getBookById: (id) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const book = Book.findAll({
+                    where: {
+                        id: {
+                            $eq: id
+                        }
+                    },
+                    raw: true
+                });
+                return resolve(book);
+            } catch (error) {
+                return reject(error);
+            }
+        })
+    },
+
     getBookById: (id) => {
         return new Promise(async (resolve, reject) => {
             try {
