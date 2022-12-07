@@ -78,27 +78,19 @@
             </div>
             <!-- Sidebar end=============================================== -->
             <div class="span9">
-                <ul class="breadcrumb">
-                    <li><a href="index">Home</a> <span class="divider">/</span></li>
-                    <li class="active">Products Name</li>
-                </ul>
-                <h3> Products Name <small class="pull-right"> 40 products are available </small></h3>
-                <hr class="soft" />
-                <p>
-                    Nowadays the lingerie industry is one of the most successful business spheres.We always stay in
-                    touch with the latest fashion tendencies - that is why our goods are so popular and we have a great
-                    number of faithful customers all over the country.
-                </p>
                 <hr class="soft" />
                 <form class="form-horizontal span6">
-                    <div class="control-group">
-                        <label class="control-label alignL">Sort By </label>
-                        <select>
-                            <option>Priduct name A - Z</option>
-                            <option>Priduct name Z - A</option>
-                            <option>Priduct Stoke</option>
-                            <option>Price Lowest first</option>
-                        </select>
+                    <div class="dropdown show">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Dropdown link
+                        </a>
+                
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="{{originalUrl}}&sort=asc">A-Z</a>
+                            <a class="dropdown-item" href="{{originalUrl}}&sort=desc">Z-A</a>
+                            <a class="dropdown-item" href="{{originalUrl}}&sort=price">Lowest First</a>
+                        </div>
                     </div>
                 </form>
 
@@ -306,96 +298,26 @@
 
                     <div class="tab-pane  active" id="blockView">
                         <ul class="thumbnails">
+                            {{#each products}}
                             <li class="span3">
                                 <div class="thumbnail">
-                                    <a href="product_details"><img src="/customers/img/themes/images/products/3.jpg" alt="" /></a>
+                                    <a href="product_details/{{id}}"><img src="{{imageUrl}}" alt="" /></a>
                                     <div class="caption">
-                                        <h5>Manicure &amp; Pedicure</h5>
+                                        <h5>{{title}}</h5>
                                         <p>
-                                            I'm a paragraph. Click here
+                                            {{description}}
                                         </p>
-                                        <h4 style="text-align:center"><a class="btn" href="product_details"> <i
-                                                    class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i
-                                                    class="icon-shopping-cart"></i></a> <a class="btn btn-primary"
-                                                href="#">&euro;222.00</a></h4>
+                                        <h4 style="text-align:center"><a class="btn" href="product_details/{{id}}"> <i class="icon-zoom-in"></i></a> <a
+                                                class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary"
+                                                href="#">{{price}}</a></h4>
                                     </div>
                                 </div>
                             </li>
-                            <li class="span3">
-                                <div class="thumbnail">
-                                    <a href="product_details"><img src="/customers/img/themes/images/products/3.jpg" alt="" /></a>
-                                    <div class="caption">
-                                        <h5>Manicure &amp; Pedicure</h5>
-                                        <p>
-                                            I'm a paragraph. Click here
-                                        </p>
-                                        <h4 style="text-align:center"><a class="btn" href="product_details"> <i
-                                                    class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i
-                                                    class="icon-shopping-cart"></i></a> <a class="btn btn-primary"
-                                                href="#">&euro;222.00</a></h4>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="span3">
-                                <div class="thumbnail">
-                                    <a href="product_details"><img src="/customers/img/themes/images/products/3.jpg" alt="" /></a>
-                                    <div class="caption">
-                                        <h5>Manicure &amp; Pedicure</h5>
-                                        <p>
-                                            I'm a paragraph. Click here
-                                        </p>
-                                        <h4 style="text-align:center"><a class="btn" href="product_details"> <i
-                                                    class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i
-                                                    class="icon-shopping-cart"></i></a> <a class="btn btn-primary"
-                                                href="#">&euro;222.00</a></h4>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="span3">
-                                <div class="thumbnail">
-                                    <a href="product_details"><img src="/customers/img/themes/images/products/3.jpg" alt="" /></a>
-                                    <div class="caption">
-                                        <h5>Manicure &amp; Pedicure</h5>
-                                        <p>
-                                            I'm a paragraph. Click here
-                                        </p>
-                                        <h4 style="text-align:center"><a class="btn" href="product_details"> <i
-                                                    class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i
-                                                    class="icon-shopping-cart"></i></a> <a class="btn btn-primary"
-                                                href="#">&euro;222.00</a></h4>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="span3">
-                                <div class="thumbnail">
-                                    <a href="product_details"><img src="/customers/img/themes/images/products/3.jpg" alt="" /></a>
-                                    <div class="caption">
-                                        <h5>Manicure &amp; Pedicure</h5>
-                                        <p>
-                                            I'm a paragraph. Click here
-                                        </p>
-                                        <h4 style="text-align:center"><a class="btn" href="product_details"> <i
-                                                    class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i
-                                                    class="icon-shopping-cart"></i></a> <a class="btn btn-primary"
-                                                href="#">&euro;222.00</a></h4>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="span3">
-                                <div class="thumbnail">
-                                    <a href="product_details"><img src="/customers/img/themes/images/products/3.jpg" alt="" /></a>
-                                    <div class="caption">
-                                        <h5>Manicure &amp; Pedicure</h5>
-                                        <p>
-                                            I'm a paragraph. Click here
-                                        </p>
-                                        <h4 style="text-align:center"><a class="btn" href="product_details"> <i
-                                                    class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i
-                                                    class="icon-shopping-cart"></i></a> <a class="btn btn-primary"
-                                                href="#">&euro;222.00</a></h4>
-                                    </div>
-                                </div>
-                            </li>
+                            {{else}}
+                            <div class="span3">
+                                <p>No books available</p>
+                            </div>
+                            {{/each}}
                         </ul>
                         <hr class="soft" />
                     </div>
