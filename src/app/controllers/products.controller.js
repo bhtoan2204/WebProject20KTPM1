@@ -11,11 +11,12 @@ router.get('/', async (req, res, next) => {
         const { name: nameFilter, cat: catFilter, sort: sortFilter } = req.query;
         let products = [];
         if(sortFilter===''){
-            products = await bookService.getFiltedBooks(req.query);
+            products = await bookService.searchBook(req.query);
                 console.log(products);
         }
         else{
-            
+            products = await bookService.searchBookAndSorted(req.query);
+            console.log(products);
         }
         const { sort, ...withoutSort } = req.query;
         res.render('customer/products', { products, originalUrl: `${req.baseUrl}?${qs.stringify(withoutSort)}` });
