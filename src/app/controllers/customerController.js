@@ -41,7 +41,7 @@ class customerController{
         res.render('customer/special_offer', {layout: 'customer-main'})
     }
     tac(req, res){
-        res.render('customer/tac')
+        res.render('customer/tac', {layout: 'customer-main'})
     }
 }
 
