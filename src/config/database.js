@@ -1,11 +1,9 @@
 const Sequelize = require('sequelize');
+const operatorsAliases = require('./operatorAlias');
 
-module.exports = new Sequelize({
-    host: 'localhost',
-    port: 5432,
-    dialect: 'postgres',
-    username: 'bookstoreadmin',
-    password: 'admin',
-    database: 'bookstore',
-    logging: console.log
+module.exports = new Sequelize(process.env.POSTGRESQL_URI, {
+    dialectOptions: {
+        ssl:true
+    },
+    operatorsAliases: operatorsAliases
 });

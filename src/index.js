@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const hbs = require('express-handlebars')
@@ -5,37 +6,29 @@ const path = require('path');
 const route = require('./routes');
 const { mainModule } = require('process');
 const config = require('./config');
+console.log('env: ', process.env.POSTGRESQL_URI);
 const db = require('./config/database');
-// const Sequelize = require('sequelize');
-// const sequelize = new Sequelize('database', 'username', 'password');
-// async function connectToPostgres() {
-//     const sequelize = new Sequelize(config.db.options);
-//     try {
-//         await sequelize.authenticate();
-//         console.log('Connection has been established successfully.');
-//         return sequelize;
-//       } catch (error) {
-    //         console.error('Unable to connect to the database:', error);
-    //       }
-    // }
+
+
 // database
 db.authenticate()
     .then(() => console.log('Database connected'))
     .catch(error => console.log(error));
 
 const app = express();
-const port = 3000;
+const port = process.env.APP_PORT;
 
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 // http logger
-app.use(morgan('combined'));
+app.use(morgan('dev'));
 
 // template engine
 app.set('view engine', 'handlebars');
 app.set('views', path.join(__dirname, 'views'));
+app.set('port', port);
 
 app.engine('handlebars', hbs.engine({
     layoutsDir: __dirname + '/views/layouts',
