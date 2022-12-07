@@ -13,7 +13,7 @@ const bookService = {
         })
     },
 
-    getFiltedBooks: (name, cat) =>{
+    getFiltedBooks: (query) =>{
         return new Promise(async (resolve, reject) =>{
             try{
                 const books = Book.findAll({
@@ -21,18 +21,18 @@ const bookService = {
                         $and: [
                             {
                                 title: {
-                                    $substring: name
+                                    $substring: query.name
                                 }
                             },
                             {
                                 categoryId: (query.cat == 0) ?
                                     { $ne: null } :
-                                    { $eq: cat }
+                                    { $eq: query.cat }
                             }
                         ]
                     },
                     raw: true
-                    }) ;
+                });
                 return resolve(books);
             }
             catch(error){
