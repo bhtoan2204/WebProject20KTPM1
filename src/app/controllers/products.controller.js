@@ -18,8 +18,9 @@ router.get('/', async (req, res, next) => {
             products = await bookService.searchBookAndSorted(req.query);
             console.log(products);
         }
+        const categories = await categoryService.getAllCategories();
         const { sort, ...withoutSort } = req.query;
-        res.render('customer/products', { products, originalUrl: `${req.baseUrl}?${qs.stringify(withoutSort)}` });
+        res.render('customer/products', { products, categories, originalUrl: `${req.baseUrl}?${qs.stringify(withoutSort)}` });
     } catch (error) {
         console.log(error);
     }
