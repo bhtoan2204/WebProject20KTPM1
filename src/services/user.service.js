@@ -11,6 +11,23 @@ const userService = {
                 return reject(error);
             }
         })
+    },
+    checkIfExists: (email) =>{
+        return new Promise(async (resolve, reject) => {
+            try{
+                const user = await User.findOne({
+                    where:{
+                        email:{
+                            $eq:email
+                        }
+                    },
+                    raw:true
+                });
+                return resolve(user);
+            } catch(error){
+                return reject(error)
+            }
+        })
     }
 }
 

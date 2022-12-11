@@ -12,6 +12,7 @@
   "author": "toan hao",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "express-handlebars": "^6.0.6",
@@ -20,7 +21,8 @@
     "pg-hstore": "^2.3.4",
     "qs": "^6.11.0",
     "sequelize": "^6.26.0",
-    "serverless-http": "^3.1.0"
+    "serverless-http": "^3.1.0",
+    "uuidv4": "^6.2.13"
   },
   "devDependencies": {
     "morgan": "^1.10.0",
