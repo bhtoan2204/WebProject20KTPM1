@@ -30,12 +30,13 @@ router.post("/", async (req, res) => {
         console.log(req.body);
         let err = [];
         const newUser = await userService.checkIfExists(email);
+        var patt = new RegExp(/^\+?1?\s*?\(?\d{3}(?:\)|[-|\s])?\s*?\d{3}[-|\s]?\d{4}$/);
         console.log(newUser);
         if(!name||!email||!pass1||!pass2||!dob||!phone){
             err.push({message: "Please Enter all fields", check: "alert-block alert-error fade in"});
         }
         if(newUser){
-            err.push({message: "Your email has already in used", check: "alert-block alert-error fade in"});
+            err.push({message: "Your email had already in used", check: "alert-block alert-error fade in"});
         }
         if(pass1.length<6){
             err.push({message: "Password should be at least 6 characters", check: "alert-block alert-error fade in"});
@@ -44,7 +45,10 @@ router.post("/", async (req, res) => {
             err.push({message: "Email is not valid", check: "alert-block alert-error fade in"});
         }
         if(pass1!=pass2){
-            err.push({message: "Password doesn't match", check: "alert-block alert-error fade in"});
+            err.push({message: "Passwords do not match", check: "alert-block alert-error fade in"});
+        }
+        if(!patt.test(phone)){
+            err.push({message: "Invalid numberphone", check: "alert-block alert-error fade in"});
         }
         if(err.length>0){
             res.render("customer/register", {err});
@@ -55,7 +59,7 @@ router.post("/", async (req, res) => {
             let hashID = await uuid();
             console.log(hashID);
             console.log(hashPassword);
-            
+            const addedUser = userService.createNewUser(hashID, name, email, hashPassword, dob, phone);
             err.push({message: "Successful", check: "alert-info fade in"})
             res.render("customer/register", {err});
         }
