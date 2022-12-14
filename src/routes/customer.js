@@ -7,6 +7,7 @@ const homeController = require('../app/controllers/home.controller');
 const productsController = require('../app/controllers/products.controller');
 const productDetailController = require('../app/controllers/product_detail.controller');
 const userController = require('../app/controllers/user.controller');
+const loginController = require('../app/controllers/login.controller')
 
 router.use('/compair', customerController.compair);
 router.use('/components', customerController.components);
@@ -15,7 +16,9 @@ router.use('/faq', customerController.faq);
 router.use('/forgetpass', customerController.forgetpass);
 router.use('/home', homeController);
 router.use('/legal_notice', customerController.legal_notice);
-router.use('/login', customerController.login);
+router.get('/login', customerController.login);
+router.post('/login/find', loginController.checkLogin);
+router.get('/logout', customerController.logout);
 router.use('/register', customerController.register);
 router.use('/normal', customerController.normal);
 router.use('/product_details', productDetailController);

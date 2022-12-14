@@ -10,7 +10,8 @@ router.get('/', async (req, res, next) => {
         const categories = await categoryService.getAllCategories();
         const books = await bookService.getAllBooks();
         const searchUrl='/customer/products/search';
-        res.render('customer/home', { books: books, categories: categories, searchUrl: searchUrl, layout: 'customer-main' });
+        let user = req.cookies["user"]
+        res.render('customer/home', { books: books, categories: categories, searchUrl: searchUrl, layout: 'customer-main', user, });
     } catch (error) {
         console.log(error);
     }
