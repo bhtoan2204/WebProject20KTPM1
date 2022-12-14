@@ -11,6 +11,37 @@ const userService = {
                 return reject(error);
             }
         })
+    },
+
+    getUserById: (id) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const user = await User.findOne({
+                    where: {
+                        id: id
+                    },
+                    raw: true
+                });
+                return resolve(user);
+            } catch (error) {
+                return reject(error);
+            }
+        })
+    },
+
+    updateUserById: (id, data) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const result = await User.update(data, {
+                    where: {
+                        id: id
+                    }
+                });
+                return resolve(result);
+            } catch (error) {
+                return reject(error);
+            }
+        })
     }
 }
 
