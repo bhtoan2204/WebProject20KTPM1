@@ -6,6 +6,7 @@ const customerController = require('../app/controllers/customerController');
 const homeController = require('../app/controllers/home.controller');
 const productsController = require('../app/controllers/products.controller');
 const productDetailController = require('../app/controllers/product_detail.controller');
+const userController = require('../app/controllers/user.controller');
 
 router.use('/compair', customerController.compair);
 router.use('/components', customerController.components);
@@ -22,5 +23,6 @@ router.use('/product_summary', customerController.product_summary);
 router.use('/special_offer', customerController.special_offer);
 router.use('/tac', customerController.tac);
 router.use('/products', productsController);
+router.use('/user', userController);
 
 module.exports = router;
