@@ -8,6 +8,7 @@ const { mainModule } = require('process');
 const config = require('./config');
 console.log('env: ', process.env.POSTGRESQL_URI);
 const db = require('./config/database');
+const cookieParser = require('cookie-parser');
 
 
 // database
@@ -19,6 +20,8 @@ const app = express();
 const port = process.env.APP_PORT;
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(cookieParser());
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
@@ -39,4 +42,5 @@ app.engine('handlebars', hbs.engine({
 
 route(app);
 
-app.listen(port, () => {})
+// app.listen(port, () => {})
+app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`))

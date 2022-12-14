@@ -42,6 +42,16 @@ const userService = {
                 return reject(error);
             }
         })
+    },
+    findUser: (user, pass) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const users = await User.findOne({ where: { email: user, password: pass } });
+                return resolve(users);
+            } catch (error) {
+                return reject(error);
+            }
+        })
     }
 }
 
