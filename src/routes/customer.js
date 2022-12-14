@@ -26,5 +26,4 @@ router.use('/special_offer', customerController.special_offer);
 router.use('/tac', customerController.tac);
 router.use('/products', productsController);
 
-
 module.exports = router;

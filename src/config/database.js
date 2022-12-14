@@ -3,8 +3,7 @@ const operatorsAliases = require('./operatorAlias');
 
 module.exports = new Sequelize(process.env.POSTGRESQL_URI, {
     dialectOptions: {
-        ssl: true,
-        rejectUnauthorized: false
+        ssl:true
     },
     operatorsAliases: operatorsAliases
 });
