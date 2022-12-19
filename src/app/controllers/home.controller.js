@@ -11,10 +11,11 @@ router.get('/', async (req, res, next) => {
         const books = await bookService.getAllBooks();
         const searchUrl='/customer/products/search';
         let user = req.cookies["user"]
-        res.render('customer/home', { books: books, categories: categories, searchUrl: searchUrl, layout: 'customer-main', user, });
+        res.render('customer/home', { books: books, categories: categories, searchUrl: searchUrl, layout: 'customer-main', user });
     } catch (error) {
         console.log(error);
     }
 });
 
+module.exports = router;
 module.exports = router;
