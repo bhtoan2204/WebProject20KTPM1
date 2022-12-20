@@ -55,7 +55,7 @@ router.post("/", async (req, res) => {
         }
         else{
             //Validation has passed
-            let hashPassword = await bcrypt.hash(pass2,10);
+            let hashPassword = await bcrypt.hash(pass2, 10);
             let hashID = await uuid();
             console.log(hashID);
             console.log(hashPassword);

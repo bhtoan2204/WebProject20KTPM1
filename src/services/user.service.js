@@ -1,5 +1,6 @@
 const User = require('../models/user.model');
 const db = require('../config/database');
+const bcrypt = require('bcryptjs')
 
 const userService = {
     getAllUsers: () => {
@@ -46,10 +47,24 @@ const userService = {
     findUser: (user, pass) => {
         return new Promise(async (resolve, reject) => {
             try {
-                const users = await User.findOne({ where: { email: user, password: pass } });
-                return resolve(users);
+                const users = await User.findOne({ where: { email: user } });
+                if (users == null) 
+                    return reject(null);
+                else {
+                    // console.log(5555555555555555);
+                  bcrypt.compare(pass, users.password)
+                    .then((result) => {
+                        if(result == true)
+                            return resolve(users);
+                        else
+                            return resolve(null);
+                    })
+                    .catch((err) => {
+                        return reject(null);
+                    });
+                }
             } catch (error) {
-                return reject(error);
+                return reject(null);
             }
         })
     },
