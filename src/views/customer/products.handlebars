@@ -327,13 +327,13 @@
                 <div class="pagination">
                     <ul>
 						{{#if pagination_info.has_previous_page}}
-						<li><a href="{{originalUrl}}?page={{pagination_info.previous_page}}">Previous</a></li>
+						<li><a href="{{originalUrl}}&page={{pagination_info.previous_page}}">Previous</a></li>
 						{{/if}}
-						{{#forloop pagination_info.first_page pagination_info.last_page 1}}
-							<li><a href="{{originalUrl}}?page={{@index}}">{{@index}}</a></li>
+						{{#forloop pagination_info.first_page pagination_info.last_page 1 originalUrl}}
+							<li><a href="{{@realUrl}}&page={{@index}}">{{@index}}</a></li>
 						{{/forloop}}
 						{{#if pagination_info.has_next_page}}
-						<li><a href="{{originalUrl}}?page={{pagination_info.next_page}}">Next</a></li>
+						<li><a href="{{originalUrl}}&page={{pagination_info.next_page}}">Next</a></li>
 						{{/if}}
                     </ul>
                 </div>

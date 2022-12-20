@@ -32,7 +32,13 @@
                         <option value="{{id}}">{{name}}</option>
                         {{/each}}
                     </select>
-                    <button type="submit" id="submitButton" class="btn btn-primary" name="sort">Search</button>
+                    <select class="srchTxt" name="sort">
+                        <option value="">None</option>
+                        <option value="asc">A-Z</option>
+                        <option value="desc">Z-A</option>
+                        <option value="price">Lowest price first</option>
+                    </select>
+                    <button type="submit" name="page" id="submitButton" class="btn btn-primary">Search</button>
                 </form>
                 <ul id="topMenu" class="nav pull-right">
                     <li class=""><a href="special_offer">Specials Offer</a></li>

@@ -13,30 +13,32 @@ router.get('/', async (req, res, next) => {
         const {sort: sortFilter } = req.query;
         const pageAsNum = req.query.page? Number(req.query.page) : 1;
 
-        let page = 1
+        let pageNo = 1
         if(!Number.isNaN(pageAsNum)&&pageAsNum>0){
-            page = pageAsNum;
+            pageNo = pageAsNum;
         }
 
         let products = [];
         if(sortFilter===''){
             const totalBooks = await bookService.searchBook(req.query);
             const countBooks = totalBooks.length;
-            var paginator = new Paginator(limit, 2);
-            var pagination_info = paginator.build(countBooks, page);
-            products = await bookService.searchBookByLimit(req.query, limit*(page-1), limit);
+            var paginator = new Paginator(limit, 6);
+            var pagination_info = paginator.build(countBooks, pageNo);
+            products = await bookService.searchBookByLimit(req.query, limit*(pageNo-1), limit);
         }
         else{
             const totalBooks = await bookService.searchBookAndSorted(req.query);
             const countBooks = totalBooks.length;
-            var paginator = new Paginator(limit, 2);
-            var pagination_info = paginator.build(countBooks, page);
-            products = await bookService.searchBookAndSortedByLimit(req.query, limit*(page-1), limit);
+            var paginator = new Paginator(limit, 6);
+            var pagination_info = paginator.build(countBooks, pageNo);
+            products = await bookService.searchBookAndSortedByLimit(req.query, limit*(pageNo-1), limit);
         }
         console.log(pagination_info);
 
         const categories = await categoryService.getAllCategories();
-        const { sort, ...withoutSort } = req.query;
+        const { page, ...withoutSort } = req.query;
+        const url = `${req.baseUrl}?${qs.stringify(withoutSort)}`.split('&');
+        console.log(url);
         res.render('customer/products', {pagination_info, products, categories, originalUrl: `${req.baseUrl}?${qs.stringify(withoutSort)}` });
     } catch (error) {
         console.log(error);

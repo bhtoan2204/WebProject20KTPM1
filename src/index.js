@@ -9,16 +9,22 @@ const config = require('./config');
 console.log('env: ', process.env.POSTGRESQL_URI);
 const db = require('./config/database');
 const cookieParser = require('cookie-parser');
+var paginate = require('handlebars-paginate');
+
 
 const helper = hbs.create({});
-helper.handlebars.registerHelper('forloop', function(from, to, incr, block) {
+helper.handlebars.registerHelper('forloop', function(from, to, incr, url, block) {
     var accum = '';
     for(var i = from; i<= to; i+=incr){
         block.data.index = i;
+        block.data.realUrl = url;
         accum+= block.fn(i);
     }
     return accum;
 });
+
+helper.handlebars.registerHelper('paginate', paginate);
+
 
 // database
 db.authenticate()
