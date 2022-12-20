@@ -1,5 +1,4 @@
 require('dotenv').config();
-require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const hbs = require('express-handlebars')
@@ -11,11 +10,11 @@ console.log('env: ', process.env.POSTGRESQL_URI);
 const db = require('./config/database');
 const cookieParser = require('cookie-parser');
 
-
 // database
 db.authenticate()
     .then(() => console.log('Database connected'))
     .catch(error => console.log(error));
+
 
 const app = express();
 const port = process.env.APP_PORT;
@@ -38,8 +37,7 @@ app.engine('handlebars', hbs.engine({
     layoutsDir: __dirname + '/views/layouts',
     partialsDir: __dirname + '/views/partials',
     defaultLayout: 'customer-main',
-}))
-
+}));
 
 route(app);
 
