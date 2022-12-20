@@ -15,15 +15,16 @@ class loginController{
     async checkLogin(req, res){
         const { email, password } = req.body;  
         
-            let hash = await bcrypt.hashSync('password', 10)
-            const user = await userService.findUser(email, hash)
-            if(user != null)
-            {
-                res.cookie('user',user);
-                res.redirect('/');
-            }                
-            else
-                res.render('customer/login', {message: 'Wrong email or password!'})
+        let hash = await bcrypt.hash(password,10);
+        const user = await userService.findUser(email, hash)
+        if(user != null)
+        {
+            res.cookie('user', user);
+            res.redirect('/');
+        }                
+        else
+            res.render('customer/login', {message: 'Wrong email or password!'})
+            
 
     }
 }
