@@ -143,16 +143,18 @@
 					{{/each}}
 				</ul>
 				<div class="pagination">
-                    <ul>
-                    {{#if pagination_info.has_previous_page}}
-					<li><a href="{{originalUrl}}?page={{pagination_info.previous_page}}">Previous</a></li>
-					{{/if}}
-					<li><a>Current page: {{pagination_info.current_page}}</a></li>
-					{{#if pagination_info.has_next_page}}
-					<li><a href="{{originalUrl}}?page={{pagination_info.next_page}}">Next</a></li>
-					{{/if}}
-                    </ul>
-                </div>
+					<ul>
+						{{#if pagination_info.has_previous_page}}
+						<li><a href="{{originalUrl}}?page={{pagination_info.previous_page}}">Previous</a></li>
+						{{/if}}
+						{{#forloop pagination_info.first_page pagination_info.last_page 1}}
+							<li><a href="{{originalUrl}}?page={{@index}}">{{@index}}</a></li>
+						{{/forloop}}
+						{{#if pagination_info.has_next_page}}
+						<li><a href="{{originalUrl}}?page={{pagination_info.next_page}}">Next</a></li>
+						{{/if}}
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -90,7 +90,7 @@
                             <a class="dropdown-item" href="{{originalUrl}}&sort=asc">A-Z</a>
                             <a class="dropdown-item" href="{{originalUrl}}&sort=desc">Z-A</a>
                             <a class="dropdown-item" href="{{originalUrl}}&sort=price">Lowest First</a>
-                        </div>
+                        </div>  
                     </div>
                 </form>
 
@@ -326,13 +326,15 @@
                 <a href="/customer/compair" class="btn btn-large pull-right">Compair Product</a>
                 <div class="pagination">
                     <ul>
-                    {{#if pagination_info.has_previous_page}}
-					<li><a href="{{originalUrl}}&page={{pagination_info.previous_page}}">Previous</a></li>
-					{{/if}}
-					<li><a>Current page: {{pagination_info.current_page}}</a></li>
-					{{#if pagination_info.has_next_page}}
-					<li><a href="{{originalUrl}}&page={{pagination_info.next_page}}">Next</a></li>
-					{{/if}}
+						{{#if pagination_info.has_previous_page}}
+						<li><a href="{{originalUrl}}?page={{pagination_info.previous_page}}">Previous</a></li>
+						{{/if}}
+						{{#forloop pagination_info.first_page pagination_info.last_page 1}}
+							<li><a href="{{originalUrl}}?page={{@index}}">{{@index}}</a></li>
+						{{/forloop}}
+						{{#if pagination_info.has_next_page}}
+						<li><a href="{{originalUrl}}?page={{pagination_info.next_page}}">Next</a></li>
+						{{/if}}
                     </ul>
                 </div>
                 <br class="clr" />
