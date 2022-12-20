@@ -9,7 +9,6 @@ const config = require('./config');
 console.log('env: ', process.env.POSTGRESQL_URI);
 const db = require('./config/database');
 const cookieParser = require('cookie-parser');
-var paginate = require('handlebars-paginate');
 
 
 const helper = hbs.create({});
@@ -22,9 +21,6 @@ helper.handlebars.registerHelper('forloop', function(from, to, incr, url, block)
     }
     return accum;
 });
-
-helper.handlebars.registerHelper('paginate', paginate);
-
 
 // database
 db.authenticate()
