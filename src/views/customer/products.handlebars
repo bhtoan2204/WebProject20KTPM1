@@ -98,7 +98,7 @@
                             <a class="dropdown-item" href="{{originalUrl}}&sort=asc">A-Z</a>
                             <a class="dropdown-item" href="{{originalUrl}}&sort=desc">Z-A</a>
                             <a class="dropdown-item" href="{{originalUrl}}&sort=price">Lowest First</a>
-                        </div>
+                        </div>  
                     </div>
                 </form>
 
@@ -338,19 +338,21 @@
                             {{/each}}
                         </ul>
                         <hr class="soft" />
+                        
                     </div>
                 </div>
-
                 <a href="/customer/compair" class="btn btn-large pull-right">Compair Product</a>
                 <div class="pagination">
                     <ul>
-                        <li><a href="/customer/#">&lsaquo;</a></li>
-                        <li><a href="/customer/#">1</a></li>
-                        <li><a href="/customer/#">2</a></li>
-                        <li><a href="/customer/#">3</a></li>
-                        <li><a href="/customer/#">4</a></li>
-                        <li><a href="/customer/#">...</a></li>
-                        <li><a href="/customer/#">&rsaquo;</a></li>
+						{{#if pagination_info.has_previous_page}}
+						<li><a href="{{originalUrl}}&page={{pagination_info.previous_page}}">Previous</a></li>
+						{{/if}}
+						{{#forloop pagination_info.first_page pagination_info.last_page 1 originalUrl}}
+							<li><a href="{{@realUrl}}&page={{@index}}">{{@index}}</a></li>
+						{{/forloop}}
+						{{#if pagination_info.has_next_page}}
+						<li><a href="{{originalUrl}}&page={{pagination_info.next_page}}">Next</a></li>
+						{{/if}}
                     </ul>
                 </div>
                 <br class="clr" />

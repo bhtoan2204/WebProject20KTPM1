@@ -5,22 +5,41 @@ const config = require('../../config');
 const bookService = require('../../services/book.service');
 const qs = require('qs');
 const categoryService = require("../../services/category.service");
+var Paginator = require("paginator");
+const limit = 6;
 
 router.get('/', async (req, res, next) => {
     try {
-        const { name: nameFilter, cat: catFilter, sort: sortFilter } = req.query;
+        const {sort: sortFilter } = req.query;
+        const pageAsNum = req.query.page? Number(req.query.page) : 1;
+
+        let pageNo = 1
+        if(!Number.isNaN(pageAsNum)&&pageAsNum>0){
+            pageNo = pageAsNum;
+        }
+
         let products = [];
         if(sortFilter===''){
-            products = await bookService.searchBook(req.query);
-                console.log(products);
+            const totalBooks = await bookService.searchBook(req.query);
+            const countBooks = totalBooks.length;
+            var paginator = new Paginator(limit, 6);
+            var pagination_info = paginator.build(countBooks, pageNo);
+            products = await bookService.searchBookByLimit(req.query, limit*(pageNo-1), limit);
         }
         else{
-            products = await bookService.searchBookAndSorted(req.query);
-            console.log(products);
+            const totalBooks = await bookService.searchBookAndSorted(req.query);
+            const countBooks = totalBooks.length;
+            var paginator = new Paginator(limit, 6);
+            var pagination_info = paginator.build(countBooks, pageNo);
+            products = await bookService.searchBookAndSortedByLimit(req.query, limit*(pageNo-1), limit);
         }
+        console.log(pagination_info);
+
         const categories = await categoryService.getAllCategories();
-        const { sort, ...withoutSort } = req.query;
-        res.render('customer/products', { products, categories, originalUrl: `${req.baseUrl}?${qs.stringify(withoutSort)}` });
+        const { page, ...withoutSort } = req.query;
+        const url = `${req.baseUrl}?${qs.stringify(withoutSort)}`.split('&');
+        console.log(url);
+        res.render('customer/products', {pagination_info, products, categories, originalUrl: `${req.baseUrl}?${qs.stringify(withoutSort)}` });
     } catch (error) {
         console.log(error);
     }

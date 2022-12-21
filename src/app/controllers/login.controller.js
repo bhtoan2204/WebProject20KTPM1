@@ -14,10 +14,9 @@ class loginController{
     // [POST] /login/find
     async checkLogin(req, res){
         const { email, password } = req.body;  
-        // const user = await userService.getAllUsers()
-        // res.json(user)
-        //let hash = await bcrypt.encodeBase64(password, 10);
-        const user = await userService.findUser(email, password)
+        
+        let hash = await bcrypt.hash(password,10);
+        const user = await userService.findUser(email, hash)
         if(user != null)
         {
             res.cookie('user', user);

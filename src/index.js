@@ -1,5 +1,4 @@
 require('dotenv').config();
-require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const hbs = require('express-handlebars')
@@ -12,10 +11,22 @@ const db = require('./config/database');
 const cookieParser = require('cookie-parser');
 
 
+const helper = hbs.create({});
+helper.handlebars.registerHelper('forloop', function(from, to, incr, url, block) {
+    var accum = '';
+    for(var i = from; i<= to; i+=incr){
+        block.data.index = i;
+        block.data.realUrl = url;
+        accum+= block.fn(i);
+    }
+    return accum;
+});
+
 // database
 db.authenticate()
     .then(() => console.log('Database connected'))
     .catch(error => console.log(error));
+
 
 const app = express();
 const port = process.env.APP_PORT;
@@ -38,8 +49,7 @@ app.engine('handlebars', hbs.engine({
     layoutsDir: __dirname + '/views/layouts',
     partialsDir: __dirname + '/views/partials',
     defaultLayout: 'customer-main',
-}))
-
+}));
 
 route(app);
 
