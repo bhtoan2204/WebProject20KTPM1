@@ -14,9 +14,7 @@ class loginController{
     // [POST] /login/find
     async checkLogin(req, res){
         const { email, password } = req.body;  
-        
-        let hash = await bcrypt.hash(password,10);
-        const user = await userService.findUser(email, hash)
+        const user = await userService.findUser(email, password)
         if(user != null)
         {
             res.cookie('user', user);
@@ -25,7 +23,6 @@ class loginController{
         else
             res.render('customer/login', {message: 'Wrong email or password!'})
             
-
     }
 }
 
