@@ -12,6 +12,7 @@
   "author": "toan hao",
   "license": "ISC",
   "dependencies": {
+    "@popperjs/core": "^2.11.6",
     "ajv": "^6.12.6",
     "ajv-formats": "^2.1.1",
     "bcryptjs": "^2.4.3",
