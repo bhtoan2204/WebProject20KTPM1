@@ -8,6 +8,7 @@
                 <a class="text-dark" href="">Help</a>
                 <span class="text-muted px-2">|</span>
                 <a class="text-dark" href="">Support</a>
+                {{#if user}} <div>{{user.name}}</div>{{/if}}
             </div>
         </div>
         <div class="col-lg-6 text-center text-lg-right">
@@ -142,8 +143,13 @@
                         <a href="contact.html" class="nav-item nav-link">Contact</a>
                     </div>
                     <div class="navbar-nav ml-auto py-0">
+                        {{#if user}}
+                        <a href="/customer/logout" class="nav-item nav-link">Logout</a>
+                        {{else}}
                         <a href="/customer/login" class="nav-item nav-link">Login</a>
+                        {{/if}}
                         <a href="/customer/register" class="nav-item nav-link">Register</a>
+                        
                     </div>
                 </div>
             </nav>

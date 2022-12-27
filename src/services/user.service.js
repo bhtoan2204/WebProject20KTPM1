@@ -57,17 +57,18 @@ const userService = {
                         if(result == true)
                             return resolve(users);
                         else
-                            return resolve(null);
+                            return reject(null);
                     })
                     .catch((err) => {
-                        return reject(null);
+                        return reject(err);
                     });
                 }
             } catch (error) {
-                return reject(null);
+                return reject(error);
             }
         })
     },
+
     checkIfExists: (email) =>{
         return new Promise(async (resolve, reject) => {
             try{
