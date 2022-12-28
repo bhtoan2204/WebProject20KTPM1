@@ -30,7 +30,6 @@ router.use('/special_offer', customerController.special_offer);
 router.use('/tac', customerController.tac);
 router.use('/products', productsController);
 router.use('/user', userController);
-router.use('/products/add-to-cart', productsController);
 router.use('/profile', customerController.profile);
 
 module.exports = router;

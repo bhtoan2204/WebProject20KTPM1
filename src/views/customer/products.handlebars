@@ -177,17 +177,12 @@
               <a href="/customer/product_details/{{id}}" class="btn btn-sm text-dark p-0"><i
                   class="fas fa-eye text-primary mr-1"></i>View
                 Detail</a>
-
-              <form id = "addToCart" method="post" action ="/customer/products/add-to-cart">
-                <input type="hidden" name="id_book" value="{{id}}">
-                <input type="hidden" name="quantity" value ="1">
-                <button class="btn btn-sm text-dark p-0">
-                  <i id ="submitBtn" type = "submit" class="fas fa-shopping-cart text-primary mr-1"></i>Add To Cart
-                </button>
-              </form>
+              <button class="btn btn-sm text-dark p-0 submitBtn" value="{{id}}" onclick="addPro(this.value)">
+                <i class="fas fa-shopping-cart text-primary mr-1" name="book_id" value="{{id}}"></i>Add To Cart
+              </button>
             </div>
           </div>
-        </div>
+        </div>  
         {{/each}}
         <div class="col-12 pb-1">
           <nav aria-label="Page navigation">

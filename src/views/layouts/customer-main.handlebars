@@ -31,10 +31,12 @@
 
 	</div>
 	<!-- JavaScript Libraries -->
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 	<script src="/customers/lib/easing/easing.min.js"></script>
 	<script src="/customers/lib/owlcarousel/owl.carousel.min.js"></script>
+
+	<script src="https://code.jquery.com/jquery-3.6.3.js"
+		integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 
 	<!-- Contact Javascript File -->
 	<script src="/customers/mail/jqBootstrapValidation.min.js"></script>
@@ -65,12 +67,29 @@
 				$result.css('color', 'red');
 			}
 
-			email?$result.removeClass('d-none'):$result.addClass('d-none');
-			
+			email ? $result.removeClass('d-none') : $result.addClass('d-none');
+
 			return false;
 		}
 
 		$('#email').on('input', validate);
+	</script>
+	<script>
+		function addPro(id) {
+			alert("add to cart  " + id);
+			$.ajax({
+				url: '/customer/products/add-to-cart',
+				method: 'post',
+				data: {id},
+				dataType: 'json',
+				success: function (data) {
+					alert("success")
+				},
+				error: function (response) {
+					alert('server error occured')
+				}
+			})
+		}
 	</script>
 </body>
 

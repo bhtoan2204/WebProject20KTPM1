@@ -71,14 +71,14 @@ router.post('/add-to-cart', async (req, res) => {
         let message = "";
         let user = req.cookies["user"];
         //console.log(user.id)
-        const params = { book_id: req.body.id_book, quantity: "1" };
+        const params = { book_id: req.body.id, quantity: "1" };
         const book_id_check = params.book_id;
         //console.log(JSON.stringify(params));
         const checkExistCart = await cartService.getCart(user.id);
         //console.log(checkExistCart);
         if (checkExistCart.length == 0) {
             const addedCart = await cartService.createNewCart(user.id, JSON.stringify(params));
-            message = "Successful";
+            message = "success";
         }
         else {
             // check wheather book is existing in your cart or not
@@ -97,15 +97,16 @@ router.post('/add-to-cart', async (req, res) => {
                 productsJson.push(params);
                 //console.log(productsJson);
                 const updatedCart = await cartService.updateCart(user.id, JSON.stringify(productsJson))
-                message = "Successful"
+                message = "success"
             }
         }
-        res.status(200).send(message);
     }
     catch (error) {
         console.log(error);
         res.status(500).send(error);
     }
 })
+
+
 
 module.exports = router;
