@@ -19,7 +19,8 @@ router.use('/faq', customerController.faq);
 router.use('/forgetpass', customerController.forgetpass);
 router.use('/home', homeController);
 router.use('/legal_notice', customerController.legal_notice);
-router.use('/login', loginController);
+router.post('/login/find', loginController.checkLogin);
+router.use('/login', customerController.login);
 router.get('/logout', customerController.logout);
 router.use('/register', registerController);
 router.use('/normal', customerController.normal);
@@ -29,5 +30,6 @@ router.use('/special_offer', customerController.special_offer);
 router.use('/tac', customerController.tac);
 router.use('/products', productsController);
 router.use('/user', userController);
+router.use('/profile', customerController.profile);
 
 module.exports = router;

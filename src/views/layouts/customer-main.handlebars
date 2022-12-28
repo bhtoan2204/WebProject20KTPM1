@@ -31,10 +31,12 @@
 
 	</div>
 	<!-- JavaScript Libraries -->
-	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 	<script src="/customers/lib/easing/easing.min.js"></script>
 	<script src="/customers/lib/owlcarousel/owl.carousel.min.js"></script>
+
+	<script src="https://code.jquery.com/jquery-3.6.3.js"
+		integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 
 	<!-- Contact Javascript File -->
 	<script src="/customers/mail/jqBootstrapValidation.min.js"></script>
@@ -65,12 +67,130 @@
 				$result.css('color', 'red');
 			}
 
-			email?$result.removeClass('d-none'):$result.addClass('d-none');
-			
+			email ? $result.removeClass('d-none') : $result.addClass('d-none');
+
 			return false;
 		}
 
 		$('#email').on('input', validate);
+	</script>
+	<script>
+		function addPro(id) {
+			$.ajax({
+				url: '/customer/cart/add-to-cart',
+				method: 'post',
+				data: { id },
+				dataType: 'json',
+				success: function (data) {
+					alert(data.msg)
+				},
+				error: function (data) {
+					alert('server error occured')
+				}
+			})
+		}
+	</script>
+	<script>
+		function delPro(id) {
+			$.ajax({
+				url: '/customer/cart/remove-from-cart',
+				method: 'post',
+				data: { id },
+				dataType: 'json',
+				success: function (data) {
+					$.get(location.href, function (data) {
+						$('#listproduct').empty().append($(data).find('#listproduct').children());
+					});
+					$.get(location.href, function (data) {
+						$('#summary').empty().append($(data).find('#summary').children());
+					});
+				},
+				error: function (data) {
+					alert('server error occured')
+				}
+			});
+		}
+
+		function increase(id) {
+			$.ajax({
+				url: '/customer/cart/increase-quantity',
+				method: 'post',
+				data: { id },
+				dataType: 'json',
+				success: function (data) {
+					$.get(location.href, function (data) {
+						$('#listproduct').empty().append($(data).find('#listproduct').children());
+					});
+					$.get(location.href, function (data) {
+						$('#summary').empty().append($(data).find('#summary').children());
+					});
+				},
+				error: function (data) {
+					alert('server error occured')
+				}
+			});
+		}
+		function decrease(id) {
+			$.ajax({
+				url: '/customer/cart/decrease-quantity',
+				method: 'post',
+				data: { id },
+				dataType: 'json',
+				success: function (data) {
+					$.get(location.href, function (data) {
+						$('#listproduct').empty().append($(data).find('#listproduct').children());
+					});
+					$.get(location.href, function (data) {
+						$('#summary').empty().append($(data).find('#summary').children());
+					});
+				},
+				error: function (data) {
+					alert('server error occured')
+				}
+			});
+		}
+	</script>
+	<script>
+		var citis = document.getElementById("city");
+		var districts = document.getElementById("district");
+		var wards = document.getElementById("ward");
+		var Parameter = {
+			url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
+			method: "GET",
+			responseType: "application/json",
+		};
+		var promise = axios(Parameter);
+		promise.then(function (result) {
+			renderCity(result.data);
+		});
+
+		function renderCity(data) {
+			for (const x of data) {
+				citis.options[citis.options.length] = new Option(x.Name, x.Id);
+			}
+			citis.onchange = function () {
+				district.length = 1;
+				ward.length = 1;
+				if (this.value != "") {
+					const result = data.filter(n => n.Id === this.value);
+
+					for (const k of result[0].Districts) {
+						district.options[district.options.length] = new Option(k.Name, k.Id);
+					}
+				}
+			};
+			district.onchange = function () {
+				ward.length = 1;
+				const dataCity = data.filter((n) => n.Id === citis.value);
+				if (this.value != "") {
+					const dataWards = dataCity[0].Districts.filter(n => n.Id === this.value)[0].Wards;
+
+					for (const w of dataWards) {
+						wards.options[wards.options.length] = new Option(w.Name, w.Id);
+					}
+				}
+			};
+		}
 	</script>
 </body>
 
