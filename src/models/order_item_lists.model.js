@@ -1,7 +1,7 @@
 const { DataTypes } = require('sequelize');
 const db = require('../config/database');
 
-const OrderList = db.define('OrderList', 
+const OrderItemList = db.define('OrderItemList', 
     {
         orderId:{
             field: 'order_id',
@@ -27,6 +27,8 @@ const OrderList = db.define('OrderList',
 
 );
 
-OrderList.sync().then(()=> console.log('Order List sync successfully').catch(error => console.log(error)));
+OrderItemList.sync()
+    .then(() => console.log('Order Item List sync successfully'))
+    .catch(error => console.log(error));
 
-module.exports = OrderList;
+module.exports = OrderItemList;
