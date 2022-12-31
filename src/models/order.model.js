@@ -33,6 +33,10 @@ const Order = db.define('Order',
         createdBy: {
             field:'created_by',
             type: DataTypes.STRING
+        },
+        status: {
+            field: 'status',
+            type: DataTypes.SMALLINT
         }
     },
     {

@@ -1,9 +1,9 @@
 const OrderItemList = require('../models/order_item_lists.model');
 
 const orderItemListService = {
-    createNewOne:(id, quan, bookid)=>{
-        return new Promise(async (resolve, reject)=>{
-            try{
+    createNewOne: (id, quan, bookid) => {
+        return new Promise(async (resolve, reject) => {
+            try {
                 const order = OrderItemList.create({
                     orderId: id,
                     quantity: quan,
@@ -11,7 +11,25 @@ const orderItemListService = {
                 })
                 resolve(order);
             }
-            catch (err){
+            catch (err) {
+                return reject(err);
+            }
+        })
+    },
+    getById: (id) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const order = OrderItemList.findAll({
+                    where: {
+                        orderId: {
+                            $eq: id
+                        }
+                    },
+                    raw: true
+                })
+                resolve(order);
+            }
+            catch (err) {
                 return reject(err);
             }
         })
