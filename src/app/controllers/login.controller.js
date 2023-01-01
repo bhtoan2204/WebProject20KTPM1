@@ -21,14 +21,12 @@ class loginController{
             const user = await userService.findUser(email, password)
             if(user != null)
             {
-                // res.cookie('user', user, {
-                //     onlyHttp: true,
-                //     maxAge: 600000,
-                // });
-                res.locals.user = user;
-                console.log(user); // {user: {}}
-                // res.json(res.locals)
-                // res.redirect('/');
+                res.cookie('user', user, {
+                    onlyHttp: true,
+                    maxAge: 6000000,
+                });
+                
+                res.redirect('/');
                  
             }                
             else
