@@ -2,8 +2,9 @@ const express = require('express')
 
 const router = express.Router();
 
-const adminController = require('../app/controllers/adminController');
-
+const adminController = require('../app/controllers/admin/adminController');
+const listordersController = require('../app/controllers/admin/listorders.controller');
+const orderdetailsController = require('../app/controllers/admin/orderdetails.controller');
 
 router.use('/chart', adminController.chart);
 router.use('/error401', adminController.error401);
@@ -16,6 +17,8 @@ router.use('/login', adminController.login);
 router.use('/register', adminController.register);
 router.use('/static', adminController.static);
 router.use('/table', adminController.table);
+router.use('/listorders', listordersController);
+router.use('/orderdetails', orderdetailsController);
 
 module.exports = router;
 

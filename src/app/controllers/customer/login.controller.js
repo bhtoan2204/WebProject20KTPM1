@@ -1,15 +1,15 @@
 const express = require("express");
 const { Sequelize, DataTypes } = require('sequelize');
 const router = express.Router();
-const config = require('../../config');
-const userService = require('../../services/user.service');
+const config = require('../../../config');
+const userService = require('../../../services/user.service');
 const bcrypt = require('bcryptjs')
 const { uuid } = require('uuidv4');
 const qs = require('qs');
 const { render } = require("node-sass");
-const Model = require('../../models/user.model');
+const Model = require('../../../models/user.model');
 const { application } = require("express");
-const categoryService = require("../../services/category.service");
+const categoryService = require("../../../services/category.service");
 
 
 // router.get('/', async (req, res) => {

@@ -1,9 +1,9 @@
 const express = require("express");
 
 const router = express.Router();
-const bookService = require('../../services/book.service');
-const orderService = require("../../services/order.service");
-const orderItemListService = require("../../services/order_item_lists.service");
+const bookService = require('../../../services/book.service');
+const orderService = require("../../../services/order.service");
+const orderItemListService = require("../../../services/order_item_lists.service");
 
 router.get('/:idorder', async (req, res) => {
     try {
@@ -23,7 +23,6 @@ router.get('/:idorder', async (req, res) => {
                 obj["imageUrl"] = book.imageUrl;
                 products.push(obj);
             }
-            console.log(products);
             res.render('customer/order_details', { order, products, user });
         }
     } catch (error) {

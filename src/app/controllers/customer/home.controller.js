@@ -1,9 +1,9 @@
 const express = require("express");
 
 const router = express.Router();
-const config = require('../../config');
-const bookService = require('../../services/book.service');
-const categoryService = require('../../services/category.service');
+const config = require('../../../config');
+const bookService = require('../../../services/book.service');
+const categoryService = require('../../../services/category.service');
 var Paginator = require("paginator");
 const limit = 6;
 

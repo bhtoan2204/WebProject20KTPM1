@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const cartService = require('../../services/cart.service');
-const bookService = require('../../services/book.service');
+const cartService = require('../../../services/cart.service');
+const bookService = require('../../../services/book.service');
 
 
 router.get('/', async (req, res, next) => {
@@ -11,8 +11,6 @@ router.get('/', async (req, res, next) => {
     else {
       const yourCart = await cartService.getCart(user.id);
       listProductsJson = JSON.parse(yourCart.products);
-
-      //console.log(listProductsJson);
 
       let products = [];
 
@@ -45,13 +43,9 @@ router.post('/add-to-cart', async (req, res) => {
   try {
     let message = "";
     let user = req.cookies["user"];
-    //console.log(user.id)
     const params = { book_id: req.body.id, quantity: "1" };
     const book_id_check = params.book_id;
-    //console.log(JSON.stringify(params));
     const checkExistCart = await cartService.getCart(user.id);
-    console.log(checkExistCart);
-    //console.log(checkExistCart);
     if (checkExistCart == null) {
       const addedCart = await cartService.createNewCart(user.id, "[" + JSON.stringify(params) + "]");
       message = "Successful";
@@ -60,8 +54,6 @@ router.post('/add-to-cart', async (req, res) => {
       // check wheather book is existing in your cart or not
       var check = true;
       const listBook = JSON.parse(checkExistCart.products)
-      // console.log(listBook);
-      // console.log(book_id_check);
       for (var i = 0; i < listBook.length; i++) {
         if (parseInt(listBook[i].book_id) == book_id_check) {
           check = false;
@@ -71,7 +63,6 @@ router.post('/add-to-cart', async (req, res) => {
       if (check == true) {
         const productsJson = JSON.parse(checkExistCart.products);
         productsJson.push(params);
-        //console.log(productsJson);
         const updatedCart = await cartService.updateCart(user.id, JSON.stringify(productsJson))
         message = "Successful"
       }
@@ -97,7 +88,6 @@ router.post('/remove-from-cart', async (req, res) => {
         continue;
       productsJsonRemove.push(obj);
     }
-    console.log(productsJsonRemove);
     const updatedCart = await cartService.updateCart(user.id, JSON.stringify(productsJsonRemove))
     message = "Successful"
     res.json({ msg: message })
@@ -136,7 +126,6 @@ router.post('/increase-quantity', async (req, res) => {
 router.post('/decrease-quantity', async (req, res) => {
   try {
     let user = req.cookies["user"];
-    console.log(user);
     const book_id = req.body.id;
     const cart = await cartService.getCart(user.id);
     const productsJson = JSON.parse(cart.products);
@@ -151,7 +140,6 @@ router.post('/decrease-quantity', async (req, res) => {
       newProductsJson.push(obj);
     }
     const updatedCart = await cartService.updateCart(user.id, JSON.stringify(newProductsJson))
-    console.log(updatedCart)
     message = "Successful"
     res.json({ msg: message })
   }
