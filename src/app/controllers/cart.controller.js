@@ -1,6 +1,5 @@
 const express = require("express");
 const router = express.Router();
-const _ = require('lodash');
 const cartService = require('../../services/cart.service');
 const bookService = require('../../services/book.service');
 
@@ -17,31 +16,16 @@ router.get('/', async (req, res, next) => {
 
       var subTotal = 0;
 
-      for (var i = 0; i < listProductsJson.length; i++) {
-        var obj = listProductsJson[i];
-        for (var key in obj) {
-          if (key === "book_id") {
-            for (var i = 0; i < listProductsJson.length; i++) {
-              var obj = listProductsJson[i];
-              for (var key in obj) {
-                if (key === "book_id") {
-                  product = await bookService.getBookById(obj[key]);
-                  products.push(product);
-                }
-                else {
-
-                  products[i].quantity = obj[key];
-                  products[i].total = parseInt(products[i].quantity) * parseInt(products[i].price);
-                  subTotal += products[i].total;
-                }
-                products[i].total = parseInt(products[i].quantity) * parseInt(products[i].price);
-                subTotal += products[i].total;
-              }
-            }
-          }
-          res.render('customer/cart', { user, layout: 'customer-main', products, subTotal });
-        }
+      for(let i =0; i<listProductsJson.length; i++){
+        let obj = listProductsJson[i];
+        let product = await bookService.getBookById(obj.book_id);
+        console.log(product);
+        products.push(product);
+        products[i].quantity = obj.quantity;
+        products[i].total = parseInt(obj.quantity) * Math.trunc(parseInt(products[i].price));
+        subTotal += products[i].total;
       }
+      res.render('customer/cart', { user, layout: 'customer-main', products, subTotal });
     }
   } catch (error) {
     console.log(error);

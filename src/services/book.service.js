@@ -8,7 +8,6 @@ function formatPrice(price) {
 }
 
 function formatBooks(books) {
-  console.log('books: ', books);
   return _.isArray(books)?books.map(book => {
     return { ...book, price: formatPrice(book.price)}
   }):{...books, price: formatPrice(books.price)};
@@ -28,14 +27,14 @@ const bookService = {
   getBookById: (id) => {
     return new Promise(async (resolve, reject) => {
       try {
-        const book = formatBooks(await Book.findOne({
+        const book = await Book.findOne({
           where: {
             id: {
               $eq: id
             }
           },
           raw: true
-        }));
+        });
         return resolve(book);
       } catch (error) {
         return reject(error);

@@ -11,11 +11,9 @@ router.get('/:id', async (req, res, next) => {
   try {
     const id = req.params.id;
     const book = await bookService.getBookById(id);
-    console.log('book be4:', book);
     const author = await authorService.getAuthorById(book.authorId);
     const publisher = await publisherService.getPublisherById(book.publisherId);
     Object.assign(book, { author: author.name, publisher: publisher.name, language: Language[book.language] });
-    console.log('book: ', book);
     const categories = await categoryService.getAllCategories();
     const relatedBooks = await bookService.getBooksByCategoryId(book.categoryId);
     let user = req.cookies["user"];

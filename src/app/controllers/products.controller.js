@@ -10,7 +10,7 @@ const limit = 6;
 router.get('/', async (req, res, next) => {
     try {
         const { sort: sortFilter } = req.query;
-        const pageAsNum = req.query.page ? Number(req.query.page) : 1;
+        const pageAsNum = req.query.page ? Number(req.query.page[1]) : 1;
 
         let pageNo = 1
         if (!Number.isNaN(pageAsNum) && pageAsNum > 0) {
@@ -37,11 +37,15 @@ router.get('/', async (req, res, next) => {
         if (pagination_info.total_pages < 2) {
             pagination_info = null;
         }
-        const { page, ...withoutSort } = req.query;
+        console.log("asdasdasd asdasdasd ");
+        console.log(req.query.page[1]);
+        //console.log(products);
+        //console.log(products);
         let user = req.cookies["user"];
-        res.render('customer/products', { user, pagination_info, products, categories, originalUrl: `${req.baseUrl}?${qs.stringify(withoutSort)}` });
+        res.render('customer/products', { user, pagination_info, products, categories });
     } catch (error) {
         console.log(error);
+        res.render('admin/error401')
     }
 });
 
