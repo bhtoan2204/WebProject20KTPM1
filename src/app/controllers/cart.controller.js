@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const _ = require('lodash');
 const cartService = require('../../services/cart.service');
 const bookService = require('../../services/book.service');
 
@@ -20,18 +21,27 @@ router.get('/', async (req, res, next) => {
         var obj = listProductsJson[i];
         for (var key in obj) {
           if (key === "book_id") {
-            product = await bookService.getBookById(obj[key]);
-            products.push(product);
-          }
-          else {
+            for (var i = 0; i < listProductsJson.length; i++) {
+              var obj = listProductsJson[i];
+              for (var key in obj) {
+                if (key === "book_id") {
+                  product = await bookService.getBookById(obj[key]);
+                  products.push(product);
+                }
+                else {
 
-            products[i].quantity = obj[key];
-            products[i].total = parseInt(products[i].quantity) * parseInt(products[i].price);
-            subTotal += products[i].total;
+                  products[i].quantity = obj[key];
+                  products[i].total = parseInt(products[i].quantity) * parseInt(products[i].price);
+                  subTotal += products[i].total;
+                }
+                products[i].total = parseInt(products[i].quantity) * parseInt(products[i].price);
+                subTotal += products[i].total;
+              }
+            }
           }
+          res.render('customer/cart', { user, layout: 'customer-main', products, subTotal });
         }
       }
-      res.render('customer/cart', { user, layout: 'customer-main', products, subTotal });
     }
   } catch (error) {
     console.log(error);
