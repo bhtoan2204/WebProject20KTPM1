@@ -1,6 +1,7 @@
 const Order = require('../models/order.model');
-const User = require('../models/user.model');
-
+const { $lte } = require('../config/operatorAlias');
+const { $gte } = require('../config/operatorAlias');
+const sequelize = require('sequelize');
 const orderService = {
     createNewOrder: (newAddress, subTotal, userPhone, userId) => {
         return new Promise(async (resolve, reject) => {
@@ -118,12 +119,58 @@ const orderService = {
             try {
                 const order = await Order.update(
                     {
-                    status: newStatus,
+                        status: newStatus,
                     },
                     {
                         where: { id: idOrder },
                     });
                 resolve(order);
+            }
+            catch (err) {
+                return reject(err);
+            }
+        })
+    },
+    getOrderByDay: (curDate) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const fromDate = new Date(curDate);
+                const toDate = new Date(curDate);
+                fromDate.setHours(curDate.getHours() - 12);
+                toDate.setHours(curDate.getHours() + 12);
+                console.log(Date(fromDate));
+                console.log(Date(toDate));
+                const order = await Order.findAll({
+                    attribute: ['total_price'],
+                    where: {
+                        $and: [
+                            sequelize.where(sequelize.fn('date_trunc', 'day', sequelize.col('created_at')), '>=', fromDate),
+                            sequelize.where(sequelize.fn('date_trunc', 'day', sequelize.col('created_at')), '<=', toDate),
+                        ],
+                        status: 3
+                    },
+                    raw: true
+                })
+                return resolve(order);
+            }
+            catch (err) {
+                return reject(err);
+            }
+        })
+    },
+    getOrderByMonth: (curMonth) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const order = await Order.findAll({
+                    where: {
+                        $and: [
+                            sequelize.where(sequelize.fn('EXTRACT(MONTH FROM', sequelize.col('created_at')), ') =', curMonth)
+                        ],
+                        status: 3
+                    },
+                    raw: true
+                })
+                return resolve(order);
             }
             catch (err) {
                 return reject(err);
