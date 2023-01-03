@@ -2,17 +2,17 @@ const express = require('express')
 
 const router = express.Router();
 
-const customerController = require('../app/controllers/customer/customerController');
-const homeController = require('../app/controllers/customer/home.controller');
-const productsController = require('../app/controllers/customer/products.controller');
-const productDetailController = require('../app/controllers/customer/product_detail.controller');
-const userController = require('../app/controllers/customer/user.controller');
-const loginController = require('../app/controllers/customer/login.controller')
-const registerController = require('../app/controllers/customer/register.controller');
-const cartController = require('../app/controllers/customer/cart.controller');
-const checkoutController = require('../app/controllers/customer/checkout.controller');
-const orderstatusController = require('../app/controllers/customer/orderstatus.controller');
-const orderdetailsController = require('../app/controllers/customer/order_details.controller');
+const customerController = require('../app/controllers/customerController');
+const homeController = require('../app/controllers/home.controller');
+const productsController = require('../app/controllers/products.controller');
+const productDetailController = require('../app/controllers/product_detail.controller');
+const userController = require('../app/controllers/user.controller');
+const loginController = require('../app/controllers/login.controller')
+const registerController = require('../app/controllers/register.controller');
+const cartController = require('../app/controllers/cart.controller');
+const checkoutController = require('../app/controllers/checkout.controller');
+const orderstatusController = require('../app/controllers/orderstatus.controller');
+const orderdetailsController = require('../app/controllers/order_details.controller');
 
 router.use('/components', customerController.components);
 router.use('/contact', customerController.contact);

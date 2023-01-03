@@ -1,9 +1,9 @@
 const express = require("express");
 
 const router = express.Router();
-const bookService = require('../../../services/book.service');
-const orderService = require("../../../services/order.service");
-const orderItemListService = require("../../../services/order_item_lists.service");
+const bookService = require('../../services/book.service');
+const orderService = require("../../services/order.service");
+const orderItemListService = require("../../services/order_item_lists.service");
 
 router.get('/:idorder', async (req, res) => {
     try {

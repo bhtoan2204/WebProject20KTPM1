@@ -2,9 +2,9 @@ const express = require('express')
 
 const router = express.Router();
 
-const adminController = require('../app/controllers/admin/adminController');
-const listordersController = require('../app/controllers/admin/listorders.controller');
-const orderdetailsController = require('../app/controllers/admin/orderdetails.controller');
+const adminController = require('../app/controllers/adminController');
+const listordersController = require('../app/controllers/listorders.controller');
+const orderdetailsController = require('../app/controllers/orderdetails.controller');
 
 router.use('/chart', adminController.chart);
 router.use('/error401', adminController.error401);
