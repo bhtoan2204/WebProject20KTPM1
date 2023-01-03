@@ -18,21 +18,25 @@ router.get('/', async (req, res, next) => {
         }
 
         let products = [];
+        let pagination_info;
         if (sortFilter === '') {
             const totalBooks = await bookService.searchBook(req.query);
             const countBooks = totalBooks.length;
-            var paginator = new Paginator(limit, 6);
-            var pagination_info = paginator.build(countBooks, pageNo);
+            const paginator = new Paginator(limit, 6);
+            pagination_info = paginator.build(countBooks, pageNo);
             products = await bookService.searchBookByLimit(req.query, limit * (pageNo - 1), limit);
         }
         else {
             const totalBooks = await bookService.searchBookAndSorted(req.query);
             const countBooks = totalBooks.length;
-            var paginator = new Paginator(limit, 6);
-            var pagination_info = paginator.build(countBooks, pageNo);
+            const paginator = new Paginator(limit, 6);
+            pagination_info = paginator.build(countBooks, pageNo);
             products = await bookService.searchBookAndSortedByLimit(req.query, limit * (pageNo - 1), limit);
         }
         const categories = await categoryService.getAllCategories();
+        if (pagination_info.total_pages < 2) {
+            pagination_info = null;
+        }
         const { page, ...withoutSort } = req.query;
         let user = req.cookies["user"];
         res.render('customer/products', { user, pagination_info, products, categories, originalUrl: `${req.baseUrl}?${qs.stringify(withoutSort)}` });

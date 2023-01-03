@@ -31,13 +31,13 @@
 
 	</div>
 	<!-- JavaScript Libraries -->
+	<script src="https://code.jquery.com/jquery-3.6.3.js"
+		integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 	<script src="/customers/lib/easing/easing.min.js"></script>
 	<script src="/customers/lib/owlcarousel/owl.carousel.min.js"></script>
 
-	<script src="https://code.jquery.com/jquery-3.6.3.js"
-		integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
-
+	
 	<!-- Contact Javascript File -->
 	<script src="/customers/mail/jqBootstrapValidation.min.js"></script>
 	<script src="/customers/mail/contact.js"></script>
@@ -46,34 +46,7 @@
 	<script src="/customers/js/main.js"></script>
 
 	<script src="/customers/js/pagination.js"></script>
-
-	<script>
-		const validateEmail = (email) => {
-			return email.match(
-				/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-			);
-		};
-
-		const validate = () => {
-			const $result = $('#result');
-			const email = $('#email').val();
-			$result.text('');
-
-			if (validateEmail(email)) {
-				$result.text('   ' + email + ' is valid');
-				$result.css('color', 'green');
-			} else {
-				$result.text('   ' + email + ' is not valid');
-				$result.css('color', 'red');
-			}
-
-			email ? $result.removeClass('d-none') : $result.addClass('d-none');
-
-			return false;
-		}
-
-		$('#email').on('input', validate);
-	</script>
+	
 	<script>
 		function addPro(id) {
 			$.ajax({
