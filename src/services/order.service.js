@@ -1,4 +1,5 @@
 const Order = require('../models/order.model');
+const User = require('../models/user.model');
 
 const orderService = {
     createNewOrder: (newAddress, subTotal, userPhone, userId) => {
@@ -96,6 +97,39 @@ const orderService = {
             }
         })
     },
+    getAllOrderAscByDate: () => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const order = await Order.findAll({
+                    order: [
+                        ['createAt', 'ASC'],
+                    ],
+                    raw: true
+                });
+                resolve(order);
+            }
+            catch (err) {
+                return reject(err);
+            }
+        })
+    },
+    updateOrder: (idOrder, newStatus) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const order = await Order.update(
+                    {
+                    status: newStatus,
+                    },
+                    {
+                        where: { id: idOrder },
+                    });
+                resolve(order);
+            }
+            catch (err) {
+                return reject(err);
+            }
+        })
+    }
 }
 
 module.exports = orderService;

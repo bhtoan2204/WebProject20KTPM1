@@ -23,7 +23,6 @@ router.get('/:idorder', async (req, res) => {
                 obj["imageUrl"] = book.imageUrl;
                 products.push(obj);
             }
-            console.log(products);
             res.render('customer/order_details', { order, products, user });
         }
     } catch (error) {

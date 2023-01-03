@@ -5,7 +5,6 @@ const bookService = require('../../services/book.service');
 const qs = require('qs');
 const categoryService = require("../../services/category.service");
 var Paginator = require("paginator");
-const cartService = require("../../services/cart.service");
 const limit = 6;
 
 router.get('/', async (req, res, next) => {
@@ -57,7 +56,6 @@ router.get('/category/:id', async (req, res, next) => {
 router.get('/search', async (req, res, next) => {
     try {
         const query = JSON.parse(JSON.stringify(req.query));
-        console.log('query: ', query);
         const result = await bookService.searchBook(query);
         res.render('customer/products', { products: result, searchUrl: 'customer/products/search' });
     } catch (error) {

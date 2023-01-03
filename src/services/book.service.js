@@ -1,6 +1,4 @@
 const Book = require('../models/book.model');
-const db = require('../config/database');
-const { $or } = require('../config/operatorAlias');
 
 const bookService = {
   getAllBooks: () => {

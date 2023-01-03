@@ -11,7 +11,6 @@ router.post('/', async (req, res) => {
         if (user == undefined) res.render('admin/error500', { layout: 'customer-main' })
         else {
             const address = req.body.fname + ", " + req.body.ward + ", " + req.body.district + ", " + req.body.city;
-            console.log(address)
             if (user != null) {
                 const myCart = await cartService.getCart(user.id);
                 listProductsJson = JSON.parse(myCart.products);
@@ -45,8 +44,6 @@ router.post('/', async (req, res) => {
 router.post('/create_order', async (req, res) => {
     try {
         let user = req.cookies["user"];
-        console.log("aaaaaaaaaaaa")
-        console.log(req.body)
         const yourCart = await cartService.getCart(user.id);
         listProductsJson = JSON.parse(yourCart.products);
         const newOrder = await orderService.createNewOrder(req.body.address, req.body.total, user.phone, user.id);

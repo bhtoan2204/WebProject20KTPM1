@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const cartService = require('../../services/cart.service');
-const bookService = require('../../services/book.service');
+const cartService = require('../../../services/cart.service');
+const bookService = require('../../../services/book.service');
 
 
 router.get('/', async (req, res, next) => {

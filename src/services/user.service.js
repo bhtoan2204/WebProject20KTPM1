@@ -108,6 +108,23 @@ const userService = {
                 return reject(error)
             }
         })
+    },
+    findUserById: (id) =>{
+        return new Promise(async (resolve, reject) => {
+            try{
+                const user = await User.findOne({
+                    where:{
+                        id:{
+                            $eq:id
+                        }
+                    },
+                    raw:true
+                });
+                return resolve(user);
+            } catch(error){
+                return reject(error)
+            }
+        })
     }
 }
 
