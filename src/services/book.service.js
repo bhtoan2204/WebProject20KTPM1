@@ -1,6 +1,18 @@
 const Book = require('../models/book.model');
 const db = require('../config/database');
 const { $or } = require('../config/operatorAlias');
+const _ = require('lodash');
+
+function formatPrice(price) {
+  return price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+}
+
+function formatBooks(books) {
+  console.log('books: ', books);
+  return _.isArray(books)?books.map(book => {
+    return { ...book, price: formatPrice(book.price)}
+  }):{...books, price: formatPrice(books.price)};
+}
 
 const bookService = {
   getAllBooks: () => {
@@ -16,14 +28,14 @@ const bookService = {
   getBookById: (id) => {
     return new Promise(async (resolve, reject) => {
       try {
-        const book = Book.findOne({
+        const book = formatBooks(await Book.findOne({
           where: {
             id: {
               $eq: id
             }
           },
           raw: true
-        });
+        }));
         return resolve(book);
       } catch (error) {
         return reject(error);
@@ -60,7 +72,7 @@ const bookService = {
   searchBookByLimit: (query, startingLimit, resultPerPage) => {
     return new Promise(async (resolve, reject) => {
       try {
-        const books = Book.findAll({
+        const books = formatBooks(await Book.findAll({
           offset: startingLimit,
           limit: resultPerPage,
           where: {
@@ -78,7 +90,7 @@ const bookService = {
             ]
           },
           raw: true
-        });
+        }));
         return resolve(books);
       } catch (error) {
         return reject(error);
@@ -89,14 +101,14 @@ const bookService = {
   getBooksByCategoryId: (categoryId) => {
     return new Promise(async (resolve, reject) => {
       try {
-        const books = Book.findAll({
+        const books = formatBooks(await Book.findAll({
           where: {
             categoryId: {
               $eq: categoryId
             }
           },
           raw: true
-        });
+        }));
         return resolve(books);
       } catch (error) {
         return reject(error);
@@ -120,7 +132,7 @@ const bookService = {
     return new Promise(async (resolve, reject) => {
       try {
         if (query.sort == 'asc') {
-          const books = Book.findAll({
+          const books = formatBooks(await Book.findAll({
             offset: startingLimit, limit: resultPerPage,
             where: {
               $and: [
@@ -140,11 +152,11 @@ const bookService = {
               ['title', 'ASC'],
             ],
             raw: true
-          });
+          }));
           return resolve(books);
         }
         else if (query.sort == 'desc') {
-          const books = Book.findAll({
+          const books = formatBooks(await Book.findAll({
             offset: startingLimit, limit: resultPerPage,
             where: {
               $and: [
@@ -164,11 +176,11 @@ const bookService = {
               ['title', 'DESC'],
             ],
             raw: true
-          });
+          }));
           return resolve(books);
         }
         else {
-          const books = Book.findAll({
+          const books = formatBooks(await Book.findAll({
             offset: startingLimit, limit: resultPerPage,
             where: {
               $and: [
@@ -188,7 +200,7 @@ const bookService = {
               ['price', 'ASC'],
             ],
             raw: true
-          });
+          }));
           return resolve(books);
         }
       } catch (error) {

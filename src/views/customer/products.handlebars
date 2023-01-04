@@ -161,6 +161,7 @@
             </div>
           </div>
         </div>
+        {{#if products}}
         {{#each products}}
         <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
           <div class="card product-item border-0 mb-4">
@@ -170,18 +171,24 @@
             <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
               <h6 class="text-truncate mb-3">{{title}}</h6>
               <div class="d-flex justify-content-center">
-                <h6>{{price}}</h6>
+                <h6>{{price}} &#8363;</h6>
               </div>
             </div>
             <div class="card-footer d-flex justify-content-between bg-light border">
-              <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View
+              <a href="/customer/product_details/{{id}}" class="btn btn-sm text-dark p-0"><i
+                  class="fas fa-eye text-primary mr-1"></i>View
                 Detail</a>
-              <a href="" class="btn btn-sm text-dark p-0"><i class="fas fa-shopping-cart text-primary mr-1"></i>Add To
-                Cart</a>
+              <button class="btn btn-sm text-dark p-0 submitBtn" value="{{id}}" onclick="addPro(this.value)">
+                <i class="fas fa-shopping-cart text-primary mr-1" name="book_id" value="{{id}}"></i>Add To Cart
+              </button>
             </div>
           </div>
-        </div>
+        </div>  
         {{/each}}
+        {{else}}
+          <div class="col-12 pb-1 text-center">No products available</div>
+        {{/if}}
+        {{#if pagination_info}}
         <div class="col-12 pb-1">
           <nav aria-label="Page navigation">
             <!--<ul class="pagination justify-content-center mb-3">
@@ -201,23 +208,26 @@
                 </a>
               </li>
             </ul>-->
-              <ul class="pagination justify-content-center mb-3">
-                {{#if pagination_info.has_previous_page}}
-                <li class="page-item"><a class="page-link" href="{{originalUrl}}&page={{pagination_info.previous_page}}">Previous</a></li>
-                {{else}}
-                <li class="page-item disabled"><a href="" class="page-link">Previous</a></li>
-                {{/if}}
-                {{#forloop pagination_info.first_page pagination_info.last_page 1 originalUrl}}
-                <li class="page-item"><a class="page-link" href="{{@realUrl}}&page={{@index}}">{{@index}}</a></li>
-                {{/forloop}}
-                {{#if pagination_info.has_next_page}}
-                <li class="page-item"><a class="page-link" href="{{originalUrl}}&page={{pagination_info.next_page}}">Next</a></li>
-                {{else}}
-                <li class="page-item disabled"><a href="" class="page-link">Next</a></li>
-                {{/if}}
-              </ul>
+            <ul class="pagination justify-content-center mb-3">
+              {{#if pagination_info.has_previous_page}}
+              <li class="page-item"><a class="page-link"
+                  href="{{originalUrl}}&page={{pagination_info.previous_page}}">Previous</a></li>
+              {{else}}
+              <li class="page-item disabled"><a href="" class="page-link">Previous</a></li>
+              {{/if}}
+              {{#forloop pagination_info.first_page pagination_info.last_page 1 originalUrl}}
+              <li class="page-item"><a class="page-link" href="{{@realUrl}}&page={{@index}}">{{@index}}</a></li>
+              {{/forloop}}
+              {{#if pagination_info.has_next_page}}
+              <li class="page-item"><a class="page-link"
+                  href="{{originalUrl}}&page={{pagination_info.next_page}}">Next</a></li>
+              {{else}}
+              <li class="page-item disabled"><a href="" class="page-link">Next</a></li>
+              {{/if}}
+            </ul>
           </nav>
         </div>
+        {{/if}}
       </div>
     </div>
     <!-- Shop Product End -->

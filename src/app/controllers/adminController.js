@@ -1,5 +1,6 @@
 const express = require('express');
 const userService = require('../../services/user.service')
+const bcrypt = require('bcryptjs')
 const app = express()
 
 class adminController{
@@ -17,19 +18,91 @@ class adminController{
         
     }
     update(req, res){
+        //res.json(req.cookies.admin)
         if(req.cookies.admin != null)
             res.render('admin/update', {layout: 'admin-main', admin: req.cookies.admin});
         else
-            res.redirect('/admin/login');    }
+            res.redirect('/admin/login');    
+    }
+    async edit(req, res){
+        const {name, dob, phone, pass, pass1, pass2} = req.body;
+        const object = req.cookies.admin;
+        if(name != '')
+        {
+            object.name = name;
+        }
+        if(dob != '')
+        {
+            object.dob = dob;
+        }
+        if(phone != '')
+        {
+            object.phone = phone;
+        }
+        const new_pass = await bcrypt.hash(pass1, 10);
+        if(pass != '' && pass1 != '' && pass2 != '')
+        {
+            if(pass1 == pass2) {
+                bcrypt.compare(pass, object.password)
+                .then((result) => {
+                    if(result == true){                        
+                        object.password = new_pass;
+
+                        userService.updateUserById(object.id, object);
+
+                        res.clearCookie('admin');
+                        res.cookie('admin', object);
+
+                        res.redirect('/admin/update')
+                    }
+                    else
+                        res.render('admin/update', {message: 'Wrong password. Can not update password!', layout: 'admin-main'})
+                })
+                .catch((err) => {
+                    res.render('admin/update', {message: 'Wrong password (err). Can not update password!', layout: 'admin-main'})
+                });
+            }
+            else {
+                res.render('admin/update', {message: 'Enter password again is wrong!!!', layout: 'admin-main'})
+            }
+        }
+        else {
+            userService.updateUserById(object.id, object);
+            res.clearCookie('admin');
+            res.cookie('admin', object);
+            res.redirect('/admin/update')
+        }
+    }
     table(req, res){
         if(req.cookies.admin != null)
             res.render('admin/table', {layout: 'admin-main', admin: req.cookies.admin});
         else
             res.redirect('/admin/login');
     }
+    async table_account(req, res){
+        if(req.cookies.admin != null) {
+            const account = await userService.getAllUsers();
+            res.render('admin/table_account', {layout: 'admin-main', 
+                                               admin: req.cookies.admin,
+                                               order: account});
+        }            
+        else
+            res.redirect('/admin/login');
+    }
+    async banned(req, res){
+        if(req.cookies.admin != null)
+            res.redirect('/admin/home')
+        else {
+            const account = await userService.getAllUsers();
+            res.render('admin/banned', {layout: 'admin-main', 
+                                               admin: req.cookies.admin,
+                                               order: account});
+        }
+            
+    }
     login(req, res){
         if(req.cookies.admin != null)
-            res.send("You are Logged in")
+            res.redirect('/admin/home')
         else 
             res.render('admin/login', {layout: 'admin-main', admin: req.cookies.admin});
     }
@@ -44,7 +117,7 @@ class adminController{
             const admin = await userService.findUser(email, password)
             if(admin != null)
             {
-                if(admin.isAdmin == false)
+                if(admin.isAdmin == true)
                 {
                     res.cookie('admin', admin, {
                         onlyHttp: true,

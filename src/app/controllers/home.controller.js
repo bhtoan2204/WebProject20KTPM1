@@ -1,7 +1,6 @@
 const express = require("express");
 
 const router = express.Router();
-const config = require('../../config');
 const bookService = require('../../services/book.service');
 const categoryService = require('../../services/category.service');
 var Paginator = require("paginator");
@@ -34,6 +33,7 @@ router.get('/', async (req, res, next) => {
         const latestBooks = await bookService.getLatestBooks();
 
         let user = req.cookies["user"];
+        console.log('user: ', user);
         res.render('customer/home', { 
             books: books,
             latestBooks,
