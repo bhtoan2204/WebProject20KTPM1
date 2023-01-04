@@ -12,10 +12,12 @@ const userService = require("../../services/user.service");
 const reviewService = require("../../services/review.service");
 const _ = require("lodash");
 const moment = require('moment');
+const orderService = require("../../services/order.service");
 
 router.get("/:id", async (req, res, next) => {
   const userId = req.cookies["user"]?.id;
   const cartQuantity = userId ? await cartService.getCartQuantity(userId) : 0;
+  const orders = userId ? await orderService.getOrdersByUserId(userId) : [];
   try {
     //get book
     const id = req.params.id;
@@ -59,10 +61,11 @@ router.get("/:id", async (req, res, next) => {
       categories,
       cartQuantity,
       reviews: detailedReviews,
+      orders
     });
   } catch (error) {
     console.log(error);
-    res.render("customer/error500", { cartQuantity });
+    res.render("customer/error500", { cartQuantity, orders });
   }
 });
 

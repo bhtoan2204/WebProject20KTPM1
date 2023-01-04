@@ -7,11 +7,13 @@ const categoryService = require("../../services/category.service");
 var Paginator = require("paginator");
 const cartService = require("../../services/cart.service");
 const helperService = require("../../services/helper.service");
+const orderService = require("../../services/order.service");
 const limit = 6;
 
 router.get('/', async (req, res, next) => {
     let user = req.cookies["user"];
     const cartQuantity = user ? await cartService.getCartQuantity(user.id) : 0;
+    const orders = user ? await orderService.getOrdersByUserId(user.id) : [];
     try {
         const { sort: sortFilter } = req.query;
         const pageAsNum = req.query.page ? Number(req.query.page[1]) : 1;
@@ -41,10 +43,10 @@ router.get('/', async (req, res, next) => {
         if (pagination_info.total_pages < 2) {
             pagination_info = null;
         }
-        res.render('customer/products', { user, pagination_info, products, categories, cartQuantity });
+        res.render('customer/products', { user, pagination_info, products, categories, cartQuantity, orders });
     } catch (error) {
         console.log(error);
-        res.render('customer/error500', { user, categories, cartQuantity });
+        res.render('customer/error500', { user, categories, cartQuantity, orders });
     }
 });
 

@@ -8,6 +8,7 @@ const cartService = require("../../services/cart.service");
 const helperService = require("../../services/helper.service");
 const limit = 6;
 const userService = require('../../services/user.service');
+const orderService = require("../../services/order.service");
 
 
 router.get('/', async (req, res, next) => {
@@ -40,6 +41,8 @@ router.get('/', async (req, res, next) => {
 
         const user = userId ? await userService.getUserById(userId) : null;
 
+        const orders = userId ? await orderService.getOrdersByUserId(userId) : [];
+
         res.render('customer/home', { 
             books: books,
             latestBooks,
@@ -47,6 +50,7 @@ router.get('/', async (req, res, next) => {
             searchUrl: searchUrl, 
             layout: 'customer-main', 
             user, 
+            orders,
             cartQuantity,
             pagination_info,});
     } catch (error) {

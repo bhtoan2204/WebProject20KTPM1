@@ -15,6 +15,9 @@ const fileService = {
           const file = files.myFile;
           return resolve(file.toJSON());
         }
+        // else {
+          
+        // }
       })
     })
   }

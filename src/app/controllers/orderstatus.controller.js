@@ -29,7 +29,7 @@ router.get('/', async (req, res, next) => {
             orderList.push(obj);
         }
 
-        res.render('customer/orderstatus', { orderList, user, cartQuantity });
+        res.render('customer/orderstatus', { orderList, user, cartQuantity, orders: orderList });
 
     } catch (error) {
         console.log(error);
