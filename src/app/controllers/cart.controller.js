@@ -114,7 +114,6 @@ router.post('/increase-quantity', async (req, res) => {
       newProductsJson.push(obj);
     }
     const updatedCart = await cartService.updateCart(user.id, JSON.stringify(newProductsJson))
-    console.log(updatedCart)
     message = "Successful"
     res.json({ msg: message })
   }

@@ -62,7 +62,7 @@ const bookService = {
   searchBookByLimit: (query, startingLimit, resultPerPage) => {
     return new Promise(async (resolve, reject) => {
       try {
-        const books = helperService.formatBooks(await Book.findAll({
+        const books = await Book.findAll({
           offset: startingLimit,
           limit: resultPerPage,
           where: {
@@ -80,7 +80,7 @@ const bookService = {
             ]
           },
           raw: true
-        }));
+        });
         return resolve(books);
       } catch (error) {
         return reject(error);
@@ -91,14 +91,14 @@ const bookService = {
   getBooksByCategoryId: (categoryId) => {
     return new Promise(async (resolve, reject) => {
       try {
-        const books = helperService.formatBooks(await Book.findAll({
+        const books = await Book.findAll({
           where: {
             categoryId: {
               $eq: categoryId
             }
           },
           raw: true
-        }));
+        });
         return resolve(books);
       } catch (error) {
         return reject(error);
@@ -122,7 +122,7 @@ const bookService = {
     return new Promise(async (resolve, reject) => {
       try {
         if (query.sort == 'asc') {
-          const books = helperService.formatBooks(await Book.findAll({
+          const books = await Book.findAll({
             offset: startingLimit, limit: resultPerPage,
             where: {
               $and: [
@@ -142,11 +142,11 @@ const bookService = {
               ['title', 'ASC'],
             ],
             raw: true
-          }));
+          });
           return resolve(books);
         }
         else if (query.sort == 'desc') {
-          const books = helperService.formatBooks(await Book.findAll({
+          const books = await Book.findAll({
             offset: startingLimit, limit: resultPerPage,
             where: {
               $and: [
@@ -166,11 +166,11 @@ const bookService = {
               ['title', 'DESC'],
             ],
             raw: true
-          }));
+          });
           return resolve(books);
         }
         else {
-          const books = helperService.formatBooks(await Book.findAll({
+          const books = await Book.findAll({
             offset: startingLimit, limit: resultPerPage,
             where: {
               $and: [
@@ -190,7 +190,7 @@ const bookService = {
               ['price', 'ASC'],
             ],
             raw: true
-          }));
+          });
           return resolve(books);
         }
       } catch (error) {
@@ -286,6 +286,20 @@ const bookService = {
           raw: true
         });
         return resolve(latestBooks);
+      } catch (error) {
+        return reject(error);
+      }
+    })
+  },
+  updateBookById: (bookId, data) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const result = await Book.update(data, {
+          where: {
+            id: bookId
+          }
+        });
+        return resolve(result);
       } catch (error) {
         return reject(error);
       }
