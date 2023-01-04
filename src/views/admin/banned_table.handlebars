@@ -16,23 +16,23 @@
                             <table id="datatablesSimple">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>IsConfirmed</th>
+                                        <th>Name</th>                                
                                         <th>Date of birth</th>
                                         <th>Phone</th>
                                         <th>IsAdmin</th>
                                         <th>Email</th>
+                                        <th>IsBanned</th>
                                         <th>Check details</th>   
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
                                         <th>Name</th>
-                                        <th>IsConfirmed</th>
                                         <th>Date of birth</th>
                                         <th>Phone</th>
                                         <th>IsAdmin</th>
-                                        <th>Email</th>                                   
+                                        <th>Email</th>      
+                                        <th>IsBanned</th>                             
                                         <th>Check details</th>             
                                     </tr>
                                 </tfoot>
@@ -40,16 +40,17 @@
                                     {{#each order}}
                                     <tr href="">
                                         <td>{{name}}</td>
-                                        <td>{{isConfirmed}}</td>
                                         <td>{{dob}}</td>
                                         <td>{{phone}}</td>
                                         <td>{{isAdmin}}</td>
                                         <td>{{email}}</td>
-                                        <td><a href="/admin/table_account/{{id}}">Check Details</a></td>
+                                        <td>{{isBanned}}</td>
+                                        <td><button onclick="ban({{id}})">Ban/Unban</button></td>
                                     </tr>
                                     {{/each}}
                                 </tbody>
                             </table>
+                            <script src="../../app/controllers/ban_unban.js"></script>
                         </div>
                     </div>
                 </div>

@@ -90,15 +90,15 @@ class adminController{
             res.redirect('/admin/login');
     }
     async banned(req, res){
-        if(req.cookies.admin != null)
+        //res.json(req.cookies.admin)
+        if(req.cookies.admin == null)
             res.redirect('/admin/home')
         else {
             const account = await userService.getAllUsers();
-            res.render('admin/banned', {layout: 'admin-main', 
+            res.render('admin/banned_table', {layout: 'admin-main', 
                                                admin: req.cookies.admin,
                                                order: account});
-        }
-            
+        }            
     }
     login(req, res){
         if(req.cookies.admin != null)
@@ -134,9 +134,7 @@ class adminController{
             else
             {
                 res.render('admin/login', {message: 'Wrong email or password!', layout: 'admin-main'});
-            }
-                
-                
+            }                               
         }
         else {
             res.render('admin/login', {message: 'Wrong email or password!', layout: 'admin-main'})
