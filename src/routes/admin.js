@@ -12,6 +12,7 @@ router.use('/chart', adminController.chart);
 router.use('/home', adminController.home);
 router.use('/table', adminController.table);
 router.use('/table_account', adminController.table_account)
+router.use('/table_product', adminController.table_product)
 router.use('/banned', adminController.banned)
 router.post('/update', adminController.edit)
 router.use('/update', adminController.update);

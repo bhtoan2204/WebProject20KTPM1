@@ -1,5 +1,6 @@
 const express = require('express');
 const userService = require('../../services/user.service')
+const bookService = require('../../services/book.service')
 const bcrypt = require('bcryptjs')
 const app = express()
 
@@ -18,7 +19,6 @@ class adminController{
         
     }
     update(req, res){
-        //res.json(req.cookies.admin)
         if(req.cookies.admin != null)
             res.render('admin/update', {layout: 'admin-main', admin: req.cookies.admin});
         else
@@ -83,6 +83,17 @@ class adminController{
         if(req.cookies.admin != null) {
             const account = await userService.getAllUsers();
             res.render('admin/table_account', {layout: 'admin-main', 
+                                               admin: req.cookies.admin,
+                                               order: account});
+        }            
+        else
+            res.redirect('/admin/login');
+    }
+    async table_product(req, res){
+        
+        if(req.cookies.admin != null) {
+            const account = await bookService.getAllBooks();
+            res.render('admin/table_product', {layout: 'admin-main', 
                                                admin: req.cookies.admin,
                                                order: account});
         }            
