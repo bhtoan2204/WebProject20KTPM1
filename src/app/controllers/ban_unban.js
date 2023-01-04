@@ -11,8 +11,11 @@ router.get('/:idorder', async (req, res) => {
             
             if(user.isBanned == true)
                 user.isBanned = false;
-            else
-                user.isBanned = true;
+            else{
+                if(req.cookies.admin.email != user.email)
+                    user.isBanned = true;
+            }
+                
 
             userService.updateUserById(idorder, user);
 
