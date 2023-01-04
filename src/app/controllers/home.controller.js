@@ -5,10 +5,13 @@ const bookService = require('../../services/book.service');
 const categoryService = require('../../services/category.service');
 var Paginator = require("paginator");
 const cartService = require("../../services/cart.service");
+const helperService = require("../../services/helper.service");
 const limit = 6;
+const userService = require('../../services/user.service');
 
 
 router.get('/', async (req, res, next) => {
+    const userId = req.cookies["user"]?.id;
     try {
         const categories = await categoryService.getAllCategories();
         //const books = await bookService.getAllBooks();
@@ -31,13 +34,12 @@ router.get('/', async (req, res, next) => {
 
         const searchUrl = '/customer/products/search';
         
-        const latestBooks = await bookService.getLatestBooks();
-        
-        let user = req.cookies["user"];
+        const latestBooks = helperService.formatBooks(await bookService.getLatestBooks());
 
-        const cartQuantity = user ? await cartService.getCartQuantity(user.id) : 0;
+        const cartQuantity = userId ? await cartService.getCartQuantity(userId) : 0;
 
-        console.log('user: ', user);
+        const user = userId ? await userService.getUserById(userId) : null;
+
         res.render('customer/home', { 
             books: books,
             latestBooks,

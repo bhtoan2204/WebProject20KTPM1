@@ -28,6 +28,7 @@ const cartService = {
                     },
                     raw: true
                 });
+                if (!cart) resolve(0);
                 const products = JSON.parse(cart.products);
                 const quantity = products.reduce((acc, value) => {
                     return acc + Number(value.quantity);

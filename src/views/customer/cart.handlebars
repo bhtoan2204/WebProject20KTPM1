@@ -60,18 +60,18 @@
     <div class="col-lg-4">
       <form class="mb-5" method="post" action="/customer/checkout">
         <div>
-          <select class="form-select form-select-sm mb-3" id="city" aria-label=".form-select-sm" name="city">
+          <select class="form-select form-select-sm mb-3 custom-select" id="city" aria-label=".form-select-sm" name="city">
             <option value="" selected>Chọn tỉnh thành</option>
           </select>
 
-          <select class="form-select form-select-sm mb-3" id="district" aria-label=".form-select-sm" name="district">
+          <select class="form-select form-select-sm mb-3 custom-select" id="district" aria-label=".form-select-sm" name="district">
             <option value="" selected>Chọn quận huyện</option>
           </select>
 
-          <select class="form-select form-select-sm" id="ward" aria-label=".form-select-sm" name="ward">
+          <select class="form-select form-select-sm custom-select" id="ward" aria-label=".form-select-sm" name="ward">
             <option value="" selected>Chọn phường xã</option>
           </select>
-          <input type="text" name="fname" placeholder="Số nhà" id = "fname" name="address">
+          <input class="form-control my-3" type="text" name="fname" placeholder="Số nhà" id = "fname" name="address">
         </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
         <div class="card border-secondary mb-5">

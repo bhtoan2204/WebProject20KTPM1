@@ -79,7 +79,6 @@ router.get('/', async (req, res, next) => {
     revenue["cur6"] = total;
     totalRevenue+=total;
     // End Day and Week of Revenue
-    console.log("aaaaaaaa");
 
     // End Month of Revenue
 
@@ -125,10 +124,6 @@ router.get('/', async (req, res, next) => {
     const listBookRaw = await orderItemListService.getTop4();
     
     listBook = listBookRaw[0];
-
-    //console.log(results);
-    //console.log(metadata);
-    //console.log(listBook[0]);
 
     revenue["book1"] = listBook[0].book_id;
     revenue["book2"] = listBook[1].book_id;
