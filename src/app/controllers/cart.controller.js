@@ -4,10 +4,12 @@ const cartService = require('../../services/cart.service');
 const bookService = require('../../services/book.service');
 const _ = require('lodash');
 const helperService = require('../../services/helper.service');
+const orderService = require("../../services/order.service");
 
 router.get('/', async (req, res, next) => {
   try {
     let user = req.cookies["user"];
+    const orders = user ? await orderService.getOrdersByUserId(user.id) : [];
     if (user == undefined) res.render('customer/error401', { layout: 'customer-main' })
     else {
       let products = [];
@@ -15,7 +17,7 @@ router.get('/', async (req, res, next) => {
 
       const yourCart = await cartService.getCart(user.id);
       if (!yourCart) {
-        return res.render('customer/cart', { user, products, subTotal });
+        return res.render('customer/cart', { user, products, subTotal, orders, cartQuantity: 0 });
       }
       
       const cartQuantity = await cartService.getCartQuantity(user.id);
@@ -31,7 +33,7 @@ router.get('/', async (req, res, next) => {
       }
       subTotal = helperService.formatPrice(subTotal);
       products = helperService.formatProducts(products);
-      res.render('customer/cart', { user, layout: 'customer-main', products, subTotal, cartQuantity });
+      res.render('customer/cart', { user, layout: 'customer-main', products, subTotal, cartQuantity, orders });
     }
   } catch (error) {
     console.log(error);

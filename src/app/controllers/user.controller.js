@@ -7,6 +7,7 @@ const path = require("path");
 const appRoot = require('app-root-path');
 const bcrypt = require('bcryptjs');
 const cartService = require("../../services/cart.service");
+const orderService = require("../../services/order.service");
 
 const router = express.Router();
 
@@ -79,6 +80,7 @@ router.post('/updateAvatar', async (req, res) => {
 router.get('/password', async (req, res) => {
   const userId = req.cookies['user'].id;
   const cartQuantity = userId ? await cartService.getCartQuantity(userId) : 0;
+  const orders = userId? await orderService.getOrdersByUserId(userId) : [];
   const categories = await categoryService.getAllCategories();
   try {
     const user = await userService.getUserById(userId);
@@ -87,10 +89,10 @@ router.get('/password', async (req, res) => {
       content: success==='true' ? 'Password updated' : 'Wrong password',
       alert: success==='true' ? 'success' : 'danger'
     }
-    return res.render('customer/change_password', { user, categories, message, cartQuantity });
+    return res.render('customer/change_password', { user, categories, message, cartQuantity, orders });
   } catch (error) {
     console.log(error);
-    return res.render('/customer/error500', { cartQuantity, categories})
+    return res.render('/customer/error500', { cartQuantity, categories, orders})
   }
 })
 

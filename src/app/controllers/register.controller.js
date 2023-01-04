@@ -15,7 +15,7 @@ const validateEmail = (email) => {
 router.get("/", async (req, res) => {
     try {
         const categories = await categoryService.getAllCategories();
-        res.render('customer/register', {layout: 'customer-main', categories})
+        res.render('customer/register', {layout: 'customer-main', categories, orders: [], cartQuantity: 0})
     }
     catch(error){
         console.log(error);

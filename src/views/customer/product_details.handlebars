@@ -145,6 +145,7 @@
             <div class="col-md-6">
               <h4 class="mb-4">Leave a review</h4>
               <small>Required fields are marked *</small>
+              {{#if user}}
               <div class="d-flex my-3">
                 <p class="mb-0 mr-2">Your Rating * :</p>
                 <div class="text-primary" id="leaveReview">
@@ -158,23 +159,23 @@
               <form method="post" action="/customer/review/create">
                 <div class="form-group d-none">
                   <input type="number" name="rating" id="rating" value="0">
-                  <input type="number" name="bookId" id="bookId" value="{{book.id}}">
+                  <input type="number" name="bookId" id="bookId" value="{{../book.id}}">
                 </div>
                 <div class="form-group">
                   <label for="comment">Your Review</label>
                   <textarea id="comment" name="comment" cols="30" rows="5" class="form-control"></textarea>
                 </div>
-                {{#unless user}}
-                <div class="form-group">
-                  <label for="username">Your Name *</label>
-                  <input type="text" class="form-control" id="username" name="username" required>
-                </div>
-                {{/unless}}
                 <div class="form-group mb-0">
                   <input type="submit" id="reviewSubmit" value="Leave Your Review" class="btn btn-primary px-3"
                     disabled>
                 </div>
               </form>
+              {{else}}
+              <div class="text-danger mt-4 row">
+                <b class="col-12">You must login first to leave a comment</b> 
+                <a class="btn btn-primary col-3 m-3 p-2" href="/customer/login">Login</a>
+              </div>
+              {{/if}}
             </div>
           </div>
         </div>
