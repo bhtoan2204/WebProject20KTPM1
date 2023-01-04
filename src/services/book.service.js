@@ -33,7 +33,7 @@ const bookService = {
     })
   },
 
-  searchBook: (query) => {
+  searchBook: (query, from, to) => {
     return new Promise(async (resolve, reject) => {
       try {
         const books = Book.findAll({
@@ -48,6 +48,16 @@ const bookService = {
                 categoryId: (query.cat == 0) ?
                   { $ne: null } :
                   { $eq: query.cat }
+              },
+              {
+                price:{
+                  $gte: from
+                }
+              },
+              {
+                price:{
+                  $lte: to
+                }
               }
             ]
           },
@@ -59,7 +69,7 @@ const bookService = {
       }
     })
   },
-  searchBookByLimit: (query, startingLimit, resultPerPage) => {
+  searchBookByLimit: (query, startingLimit, resultPerPage, from, to) => {
     return new Promise(async (resolve, reject) => {
       try {
         const books = await Book.findAll({
@@ -76,6 +86,16 @@ const bookService = {
                 categoryId: (query.cat == 0) ?
                   { $ne: null } :
                   { $eq: query.cat }
+              },
+              {
+                price:{
+                  $gte: from
+                }
+              },
+              {
+                price:{
+                  $lte: to
+                }
               }
             ]
           },
@@ -118,7 +138,7 @@ const bookService = {
     })
   },
 
-  searchBookAndSortedByLimit(query, startingLimit, resultPerPage) {
+  searchBookAndSortedByLimit(query, startingLimit, resultPerPage, from, to) {
     return new Promise(async (resolve, reject) => {
       try {
         if (query.sort == 'asc') {
@@ -135,6 +155,16 @@ const bookService = {
                   categoryId: (query.cat == 0) ?
                     { $ne: null } :
                     { $eq: query.cat }
+                },
+                {
+                  price:{
+                    $gte: from
+                  }
+                },
+                {
+                  price:{
+                    $lte: to
+                  }
                 }
               ]
             },
@@ -159,6 +189,16 @@ const bookService = {
                   categoryId: (query.cat == 0) ?
                     { $ne: null } :
                     { $eq: query.cat }
+                },
+                {
+                  price:{
+                    $gte: from
+                  }
+                },
+                {
+                  price:{
+                    $lte: to
+                  }
                 }
               ]
             },
@@ -183,6 +223,16 @@ const bookService = {
                   categoryId: (query.cat == 0) ?
                     { $ne: null } :
                     { $eq: query.cat }
+                },
+                {
+                  price:{
+                    $gte: from
+                  }
+                },
+                {
+                  price:{
+                    $lte: to
+                  }
                 }
               ]
             },
@@ -198,7 +248,7 @@ const bookService = {
       }
     });
   },
-  searchBookAndSorted(query) {
+  searchBookAndSorted(query, from, to) {
     return new Promise(async (resolve, reject) => {
       try {
         if (query.sort == 'asc') {
@@ -214,6 +264,16 @@ const bookService = {
                   categoryId: (query.cat == 0) ?
                     { $ne: null } :
                     { $eq: query.cat }
+                },
+                {
+                  price:{
+                    $gte: from
+                  }
+                },
+                {
+                  price:{
+                    $lte: to
+                  }
                 }
               ]
             },
@@ -237,6 +297,16 @@ const bookService = {
                   categoryId: (query.cat == 0) ?
                     { $ne: null } :
                     { $eq: query.cat }
+                },
+                {
+                  price:{
+                    $gte: from
+                  }
+                },
+                {
+                  price:{
+                    $lte: to
+                  }
                 }
               ]
             },
@@ -260,6 +330,16 @@ const bookService = {
                   categoryId: (query.cat == 0) ?
                     { $ne: null } :
                     { $eq: query.cat }
+                },
+                {
+                  price:{
+                    $gte: from
+                  }
+                },
+                {
+                  price:{
+                    $lte: to
+                  }
                 }
               ]
             },

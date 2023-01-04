@@ -20,32 +20,18 @@
       <!-- Price Start -->
       <div class="border-bottom mb-4 pb-4">
         <h5 class="font-weight-semi-bold mb-4">Filter by price</h5>
-        <form>
-          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-            <input type="checkbox" class="custom-control-input" checked id="price-all">
-            <label class="custom-control-label" for="price-all">All Price</label>
-          </div>
-          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-            <input type="checkbox" class="custom-control-input" id="price-1">
-            <label class="custom-control-label" for="price-1">$0 - $100</label>
-          </div>
-          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-            <input type="checkbox" class="custom-control-input" id="price-2">
-            <label class="custom-control-label" for="price-2">$100 - $200</label>
-          </div>
-          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-            <input type="checkbox" class="custom-control-input" id="price-3">
-            <label class="custom-control-label" for="price-3">$200 - $300</label>
-          </div>
-          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3">
-            <input type="checkbox" class="custom-control-input" id="price-4">
-            <label class="custom-control-label" for="price-4">$300 - $400</label>
-          </div>
-          <div class="custom-control custom-checkbox d-flex align-items-center justify-content-between">
-            <input type="checkbox" class="custom-control-input" id="price-5">
-            <label class="custom-control-label" for="price-5">$400 - $500</label>
-          </div>
-        </form>
+          <button class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3" 
+          id="specialButton" data-params='0,10000000'>All</button>
+          <button class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3" 
+          id="specialButton1" data-params='0,50000'>0 - 50000</button>
+          <button class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3" 
+          id="specialButton2" data-params='50000,100000'>50000 - 100000</button>
+          <button class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3" 
+          id="specialButton3" data-params='100000,200000'>100000 - 200000</button>
+          <button class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3" 
+          id="specialButton4" data-params='200000,500000'>200000 - 500000</button>
+          <button class="custom-control custom-checkbox d-flex align-items-center justify-content-between mb-3" 
+          id="specialButton5" data-params='500000,10000000'> more than 500000</button>
       </div>
       </div>
       <!-- Price End -->
@@ -103,7 +89,7 @@
             <ul class="pagination justify-content-center mb-3">
               {{#if pagination_info.has_previous_page}}
               <button class="btn page-item p-0 m-0" value="{{pagination_info.previous_page}}" onclick="paginate(this.value)">
-                <a class="page-link">Next</a></button>
+                <a class="page-link">Previous</a></button>
               {{else}}
               <button class="btn page-item disabled p-0 m-0"><a href="" class="page-link">Previous</a></button>
               {{/if}}

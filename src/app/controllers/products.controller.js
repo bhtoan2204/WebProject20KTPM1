@@ -16,7 +16,11 @@ router.get('/', async (req, res, next) => {
     const orders = user ? await orderService.getOrdersByUserId(user.id) : [];
     try {
         const { sort: sortFilter } = req.query;
-        const pageAsNum = req.query.page ? Number(req.query.page[1]) : 1;
+        const pageAsNum = req.query.page[1] ? Number(req.query.page[1]) : 1;
+        const from = req.query.from[1] ? Number(req.query.from[1]): 0;
+        const to = req.query.to[1] ? Number(req.query.to[1]): 1000000000;
+
+        console.log(from + "->" + to)
 
         let pageNo = 1
         if (!Number.isNaN(pageAsNum) && pageAsNum > 0) {
@@ -26,18 +30,18 @@ router.get('/', async (req, res, next) => {
         let products = [];
         let pagination_info;
         if (sortFilter === '') {
-            const totalBooks = await bookService.searchBook(req.query);
+            const totalBooks = await bookService.searchBook(req.query, from, to);
             const countBooks = totalBooks.length;
             const paginator = new Paginator(limit, 6);
             pagination_info = paginator.build(countBooks, pageNo);
-            products = helperService.formatBooks(await bookService.searchBookByLimit(req.query, limit * (pageNo - 1), limit));
+            products = await bookService.searchBookByLimit(req.query, limit * (pageNo - 1), limit, from, to);
         }
         else {
-            const totalBooks = await bookService.searchBookAndSorted(req.query);
+            const totalBooks = await bookService.searchBookAndSorted(req.query, from, to);
             const countBooks = totalBooks.length;
             const paginator = new Paginator(limit, 6);
             pagination_info = paginator.build(countBooks, pageNo);
-            products = helperService.formatBooks(await bookService.searchBookAndSortedByLimit(req.query, limit * (pageNo - 1), limit));
+            products = await bookService.searchBookAndSortedByLimit(req.query, limit * (pageNo - 1), limit, from, to);
         }
         const categories = await categoryService.getAllCategories();
         if (pagination_info.total_pages < 2) {
