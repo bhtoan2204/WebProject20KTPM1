@@ -13,7 +13,6 @@ router.get('/:idorder', async (req, res) => {
         const orderDetails = await orderItemListService.getById(idorder);
         statusName = await statusService.getStatusName(order.status);
         order["statusName"] = statusName.name;
-        console.log(order);
         var products = [];
         for (var i = 0; i < orderDetails.length; i++) {
             obj = orderDetails[i];
@@ -32,7 +31,6 @@ router.get('/:idorder', async (req, res) => {
 
 router.post('/mark-pending', async (req, res) => {
     try {
-        console.log(req.body.id)
         const updateOrder = await orderService.updateOrder(req.body.id, 1);
         let message="";
         res.json({ msg: message })
