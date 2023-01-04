@@ -119,12 +119,18 @@ class adminController{
             {
                 if(admin.isAdmin == true)
                 {
-                    res.cookie('admin', admin, {
-                        onlyHttp: true,
-                        maxAge: 6000000,
-                    });
-
-                    res.redirect('/admin/home')
+                    if(admin.isBanned == false)
+                    {
+                        res.cookie('admin', admin, {
+                            onlyHttp: true,
+                            maxAge: 6000000,
+                        });
+    
+                        res.redirect('/admin/home')
+                    }
+                    else {
+                        res.render('admin/login', {message: 'You are Banned!', layout: 'admin-main'});
+                    }
                 }                
                 else
                 {

@@ -5,7 +5,8 @@ const router = express.Router();
 const adminController = require('../app/controllers/adminController');
 const listordersController = require('../app/controllers/listorders.controller');
 const orderdetailsController = require('../app/controllers/orderdetails.controller');
-const banDetail = require('../app/controllers/accountdetails.controller')
+const accountDetail = require('../app/controllers/accountdetails.controller')
+const banDetail = require('../app/controllers/ban_unban')
 
 router.use('/chart', adminController.chart);
 router.use('/home', adminController.home);
@@ -19,8 +20,8 @@ router.use('/login', adminController.login);
 router.use('/logout', adminController.logout);
 router.use('/listorders', listordersController);
 router.use('/orderdetails', orderdetailsController);
+router.use('/accountdetail', accountDetail)
 router.use('/bandetail', banDetail)
-
 
 module.exports = router;
 

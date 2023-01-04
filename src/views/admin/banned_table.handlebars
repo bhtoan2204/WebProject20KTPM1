@@ -45,12 +45,11 @@
                                         <td>{{isAdmin}}</td>
                                         <td>{{email}}</td>
                                         <td>{{isBanned}}</td>
-                                        <td><button onclick="ban({{id}})">Ban/Unban</button></td>
+                                        <td><a href="/admin/bandetail/{{id}}">Ban/Unban</a></td>
                                     </tr>
                                     {{/each}}
                                 </tbody>
                             </table>
-                            <script src="../../app/controllers/ban_unban.js"></script>
                         </div>
                     </div>
                 </div>
