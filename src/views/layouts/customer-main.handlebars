@@ -37,7 +37,6 @@
 	<script src="/customers/lib/easing/easing.min.js"></script>
 	<script src="/customers/lib/owlcarousel/owl.carousel.min.js"></script>
 
-	
 	<!-- Contact Javascript File -->
 	<script src="/customers/mail/jqBootstrapValidation.min.js"></script>
 	<script src="/customers/mail/contact.js"></script>
@@ -131,6 +130,165 @@
 				}
 			});
 		}
+		function paginate(page) {
+			const newHref = location.href + "&page=" + page;
+			$.ajax({
+				method: 'get',
+				url: newHref,
+				dataType: 'json',
+				success: function (data) {
+					alert("success")
+				},
+				complete: function (data) {
+					$.get(newHref, function (data) {
+						$('#showProduct').empty().append($(data).find('#showProduct').children());
+					});
+				}
+			});
+			e = e || window.event;
+			e.preventDefault();
+		};
+	</script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script>
+		$("#specialButton").click(function () {
+			var data1 = $(this).data('params').split(',');
+			const from = data1[0];
+			const to = data1[1];
+			const newHref = location.href + "&from=" + from + "&to=" + to;
+			$.ajax({
+				method: 'get',
+				url: newHref,
+				dataType: 'json',
+				data: {from: from, 
+						to: to},
+				success: function (data) {
+					alert("success")
+				},
+				complete: function (data) {
+					$.get(newHref, function (data) {
+						$('#showProduct').empty().append($(data).find('#showProduct').children());
+					});
+				}
+			});
+			e = e || window.event;
+			e.preventDefault();
+		});
+		$("#specialButton1").click(function () {
+			var data1 = $(this).data('params').split(',');
+			const from = data1[0];
+			const to = data1[1];
+			const newHref = location.href + "&from=" + from + "&to=" + to;
+			$.ajax({
+				method: 'get',
+				url: newHref,
+				dataType: 'json',
+				data: {from: from, 
+						to: to},
+				success: function (data) {
+					alert("success")
+				},
+				complete: function (data) {
+					$.get(newHref, function (data) {
+						$('#showProduct').empty().append($(data).find('#showProduct').children());
+					});
+				}
+			});
+			e = e || window.event;
+			e.preventDefault();
+		});
+		$("#specialButton2").click(function () {
+			var data1 = $(this).data('params').split(',');
+			const from = data1[0];
+			const to = data1[1];
+			const newHref = location.href + "&from=" + from + "&to=" + to;
+			$.ajax({
+				method: 'get',
+				url: newHref,
+				dataType: 'json',
+				data: {from: from, 
+						to: to},
+				success: function (data) {
+					alert("success")
+				},
+				complete: function (data) {
+					$.get(newHref, function (data) {
+						$('#showProduct').empty().append($(data).find('#showProduct').children());
+					});
+				}
+			});
+			e = e || window.event;
+			e.preventDefault();
+		});
+		$("#specialButton3").click(function () {
+			var data1 = $(this).data('params').split(',');
+			const from = data1[0];
+			const to = data1[1];
+			const newHref = location.href + "&from=" + from + "&to=" + to;
+			$.ajax({
+				method: 'get',
+				url: newHref,
+				dataType: 'json',
+				data: {from: from, 
+						to: to},
+				success: function (data) {
+					alert("success")
+				},
+				complete: function (data) {
+					$.get(newHref, function (data) {
+						$('#showProduct').empty().append($(data).find('#showProduct').children());
+					});
+				}
+			});
+			e = e || window.event;
+			e.preventDefault();
+		});
+		$("#specialButton4").click(function () {
+			var data1 = $(this).data('params').split(',');
+			const from = data1[0];
+			const to = data1[1];
+			const newHref = location.href + "&from=" + from + "&to=" + to;
+			$.ajax({
+				method: 'get',
+				url: newHref,
+				dataType: 'json',
+				data: {from: from, 
+						to: to},
+				success: function (data) {
+					alert("success")
+				},
+				complete: function (data) {
+					$.get(newHref, function (data) {
+						$('#showProduct').empty().append($(data).find('#showProduct').children());
+					});
+				}
+			});
+			e = e || window.event;
+			e.preventDefault();
+		});
+		$("#specialButton5").click(function () {
+			var data1 = $(this).data('params').split(',');
+			const from = data1[0];
+			const to = data1[1];
+			const newHref = location.href + "&from=" + from + "&to=" + to;
+			$.ajax({
+				method: 'get',
+				url: newHref,
+				dataType: 'json',
+				data: {from: from, 
+						to: to},
+				success: function (data) {
+					alert("success")
+				},
+				complete: function (data) {
+					$.get(newHref, function (data) {
+						$('#showProduct').empty().append($(data).find('#showProduct').children());
+					});
+				}
+			});
+			e = e || window.event;
+			e.preventDefault();
+		});
 	</script>
 	<script>
 		var button = document.getElementById("submitCart");
@@ -139,10 +297,10 @@
 		var wards = document.getElementById("ward");
 		var fname = document.getElementById("fname");
 		function compare() {
-			if(citis.value === '' || districts.value ==='' || wards ===''||fname ===''){
+			if (citis.value === '' || districts.value === '' || wards === '' || fname === '') {
 				button.disabled = true;
 			}
-			else{
+			else {
 				button.disabled = false;
 			}
 		}

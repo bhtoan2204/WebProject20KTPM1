@@ -61,17 +61,20 @@
                             <i class="fa fa-search"></i>
                         </span>
                     </div>
+                    <input type="hidden" value="" name = "from">
+                    <input type="hidden" value="" name = "to">
+                    <input type="hidden" value="" name = "page">
                 </div>
             </form>
         </div>
         <div class="col-xl-3 col-6 text-left text-lg-right">
             <a href="/customer/orderstatus" class="btn border">
-                <i class="fas fa-heart text-primary"></i>
-                <span class="badge">0</span>
+                <i class="fas fa-receipt text-primary"></i>
+                <span class="badge">{{orders.length}}</span>
             </a>
             <a href="/customer/cart" class="btn border">
                 <i class="fas fa-shopping-cart text-primary"></i>
-                <span class="badge">0</span>
+                <span id="cartQuantity" class="badge">{{cartQuantity}}</span>
             </a>
         </div>
     </div>
@@ -131,16 +134,7 @@
                             </div>
                         </form>
                         <a href="/customer/home" class="nav-item nav-link">Home</a>
-                        <a href="/customer/products?name=&cat=0&sort=&page=" class="nav-item nav-link">Products</a>
-                        <a href="detail.html" class="nav-item nav-link">Shop Detail</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="/customer/cart" class="dropdown-item">Shopping Cart</a>
-                                <a href="/customer/user/example/checkout" class="dropdown-item">Checkout</a>
-                            </div>
-                        </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="/customer/products?name=&cat=0&sort=&from=&to=&page=" class="nav-item nav-link">Products</a>
                         <div class="nav-item dropdown d-block d-lg-none">
                             <button class="btn btn-default dropdown-toggle px-0 text-dark" data-toggle="dropdown">
                                 Account
@@ -149,6 +143,7 @@
                             <div class="dropdown-menu rounded-0 m-0">
                                 {{#if user}}
                                 <a href="/customer/user/profile" class="dropdown-item">Profile</a>
+                                <a href="/customer/user/password" class="dropdown-item">Change password</a>
                                 <a href="/customer/logout" class="dropdown-item">Logout</a>
                                 {{else}}
                                 <a href="/customer/login" class="dropdown-item">Login</a>
@@ -173,6 +168,7 @@
                             </button>
                             <div class="dropdown-menu dropdown-menu-right rounded-0 m-0">
                                 <a href="/customer/user/profile" class="dropdown-item">Profile</a>
+                                <a href="/customer/user/password" class="dropdown-item">Change password</a>
                                 <a href="/customer/logout" class="dropdown-item">Logout</a>
                             </div>
                         </div>
@@ -195,13 +191,13 @@
                             <div class="p-3" style="max-width: 700px;">
                                 <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First Order
                                 </h4>
-                                <h3 class="display-4 text-white font-weight-semi-bold mb-4">Fashionable Dress</h3>
+                                <h3 class="display-4 text-white font-weight-semi-bold mb-4">All book categories</h3>
                                 <a href="" class="btn btn-light py-2 px-3">Shop Now</a>
                             </div>
                         </div>
                     </div>
                     <div class="carousel-item" style="height: 410px;">
-                        <img class="img-fluid" src="img/carousel-2.jpg" alt="Image">
+                        <img class="img-fluid" src="https://www.delcolibraries.org/sites/default/files/tumblr_static_literature-books-584.jpg" alt="Image">
                         <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                             <div class="p-3" style="max-width: 700px;">
                                 <h4 class="text-light text-uppercase font-weight-medium mb-3">10% Off Your First Order

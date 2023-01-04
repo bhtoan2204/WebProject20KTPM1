@@ -4,10 +4,15 @@ const router = express.Router();
 const bookService = require('../../services/book.service');
 const categoryService = require('../../services/category.service');
 var Paginator = require("paginator");
+const cartService = require("../../services/cart.service");
+const helperService = require("../../services/helper.service");
 const limit = 6;
+const userService = require('../../services/user.service');
+const orderService = require("../../services/order.service");
 
 
 router.get('/', async (req, res, next) => {
+    const userId = req.cookies["user"]?.id;
     try {
         const categories = await categoryService.getAllCategories();
         //const books = await bookService.getAllBooks();
@@ -30,10 +35,14 @@ router.get('/', async (req, res, next) => {
 
         const searchUrl = '/customer/products/search';
         
-        const latestBooks = await bookService.getLatestBooks();
+        const latestBooks = helperService.formatBooks(await bookService.getLatestBooks());
 
-        let user = req.cookies["user"];
-        console.log('user: ', user);
+        const cartQuantity = userId ? await cartService.getCartQuantity(userId) : 0;
+
+        const user = userId ? await userService.getUserById(userId) : null;
+
+        const orders = userId ? await orderService.getOrdersByUserId(userId) : [];
+
         res.render('customer/home', { 
             books: books,
             latestBooks,
@@ -41,6 +50,8 @@ router.get('/', async (req, res, next) => {
             searchUrl: searchUrl, 
             layout: 'customer-main', 
             user, 
+            orders,
+            cartQuantity,
             pagination_info,});
     } catch (error) {
         console.log(error);

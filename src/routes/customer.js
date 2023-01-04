@@ -13,6 +13,7 @@ const cartController = require('../app/controllers/cart.controller');
 const checkoutController = require('../app/controllers/checkout.controller');
 const orderstatusController = require('../app/controllers/orderstatus.controller');
 const orderdetailsController = require('../app/controllers/order_details.controller');
+const reviewController = require('../app/controllers/review.controller');
 
 router.use('/components', customerController.components);
 router.use('/contact', customerController.contact);
@@ -35,5 +36,6 @@ router.use('/profile', customerController.profile);
 router.use('/checkout', checkoutController);
 router.use('/orderstatus', orderstatusController);
 router.use('/order_details', orderdetailsController);
+router.use('/review', reviewController);
 
 module.exports = router;

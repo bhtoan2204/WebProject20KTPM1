@@ -96,6 +96,7 @@ $('.quantity button').on('click', function () {
             var newVal = parseFloat(oldValue) - 1;
         } else {
             newVal = 0;
+<<<<<<< HEAD
         }
     }
     button.parent().parent().find('input').val(newVal);
@@ -126,3 +127,82 @@ const validate = () => {
 }
 
 $('#email').on('input', validate);
+=======
+        }
+    }
+    button.parent().parent().find('input').val(newVal);
+});
+
+const validateEmail = (email) => {
+    return email.match(
+        /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+};
+
+const validate = () => {
+    const $result = $('#result');
+    const email = $('#email').val();
+    $result.text('');
+
+    if (validateEmail(email)) {
+        $result.text('   ' + email + ' is valid');
+        $result.css('color', 'green');
+    } else {
+        $result.text('   ' + email + ' is not valid');
+        $result.css('color', 'red');
+    }
+
+    email ? $result.removeClass('d-none') : $result.addClass('d-none');
+
+    return false;
+}
+
+$('#email').on('input', validate);
+
+$('#newPass, #confirmPass').on('keyup', function () {
+    if ($('#newPass').val() == $('#confirmPass').val()) {
+        $('#message').html('Matching').css('color', 'green');
+        $('#changePassBtn').prop('disabled', false);
+    } else {
+        $('#message').html('Not Matching').css('color', 'red');
+        $('#changePassBtn').prop('disabled', true);
+    }
+});
+
+$(document).ready(function () {
+    $('#st1').click(function () {
+        $('#leaveReview .fa-star').removeClass('fas').addClass('far');
+        $('#st1').removeClass('far').addClass('fas');
+        $('#rating').attr('value', 1);
+    });
+    $('#st2').click(function () {
+        $('#leaveReview .fa-star').removeClass('fas').addClass('far');
+        $('#st1, #st2').removeClass('far').addClass('fas');
+        $('#rating').attr('value', 2);
+    });
+    $('#st3').click(function () {
+        $('#leaveReview .fa-star').removeClass('fas').addClass('far');
+        $('#st1, #st2, #st3').removeClass('far').addClass('fas');
+        $('#rating').attr('value', 3);
+    });
+    $('#st4').click(function () {
+        $('#leaveReview .fa-star').removeClass('fas').addClass('far');
+        $('#st1, #st2, #st3, #st4').removeClass('far').addClass('fas');
+        $('#rating').attr('value', 4);
+    });
+    $('#st5').click(function () {
+        $('#leaveReview .fa-star').removeClass('fas').addClass('far');
+        $('#st1, #st2, #st3, #st4, #st5').removeClass('far').addClass('fas');
+        $('#rating').attr('value', 5);
+    });
+});
+
+$(document).ready(function () {
+    $('#leaveReview .fa-star').on('click', function () {
+        if ($('#leaveReview').children('.fas').length !== 0) {
+            console.log('goes here');
+            $('#reviewSubmit').prop('disabled', false);
+        }
+    });
+})
+>>>>>>> 81a9c9b1ecc78d8747a73b0cda25629faecbac81
