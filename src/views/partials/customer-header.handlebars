@@ -71,7 +71,7 @@
             </a>
             <a href="/customer/cart" class="btn border">
                 <i class="fas fa-shopping-cart text-primary"></i>
-                <span class="badge">0</span>
+                <span id="cartQuantity" class="badge">{{cartQuantity}}</span>
             </a>
         </div>
     </div>
@@ -132,15 +132,6 @@
                         </form>
                         <a href="/customer/home" class="nav-item nav-link">Home</a>
                         <a href="/customer/products?name=&cat=0&sort=&page=" class="nav-item nav-link">Products</a>
-                        <a href="detail.html" class="nav-item nav-link">Shop Detail</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="/customer/cart" class="dropdown-item">Shopping Cart</a>
-                                <a href="/customer/user/example/checkout" class="dropdown-item">Checkout</a>
-                            </div>
-                        </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
                         <div class="nav-item dropdown d-block d-lg-none">
                             <button class="btn btn-default dropdown-toggle px-0 text-dark" data-toggle="dropdown">
                                 Account
@@ -149,6 +140,7 @@
                             <div class="dropdown-menu rounded-0 m-0">
                                 {{#if user}}
                                 <a href="/customer/user/profile" class="dropdown-item">Profile</a>
+                                <a href="/customer/user/password" class="dropdown-item">Change password</a>
                                 <a href="/customer/logout" class="dropdown-item">Logout</a>
                                 {{else}}
                                 <a href="/customer/login" class="dropdown-item">Login</a>
@@ -173,6 +165,7 @@
                             </button>
                             <div class="dropdown-menu dropdown-menu-right rounded-0 m-0">
                                 <a href="/customer/user/profile" class="dropdown-item">Profile</a>
+                                <a href="/customer/user/password" class="dropdown-item">Change password</a>
                                 <a href="/customer/logout" class="dropdown-item">Logout</a>
                             </div>
                         </div>

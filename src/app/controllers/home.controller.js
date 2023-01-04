@@ -4,6 +4,7 @@ const router = express.Router();
 const bookService = require('../../services/book.service');
 const categoryService = require('../../services/category.service');
 var Paginator = require("paginator");
+const cartService = require("../../services/cart.service");
 const limit = 6;
 
 
@@ -31,8 +32,11 @@ router.get('/', async (req, res, next) => {
         const searchUrl = '/customer/products/search';
         
         const latestBooks = await bookService.getLatestBooks();
-
+        
         let user = req.cookies["user"];
+
+        const cartQuantity = user ? await cartService.getCartQuantity(user.id) : 0;
+
         console.log('user: ', user);
         res.render('customer/home', { 
             books: books,
@@ -41,6 +45,7 @@ router.get('/', async (req, res, next) => {
             searchUrl: searchUrl, 
             layout: 'customer-main', 
             user, 
+            cartQuantity,
             pagination_info,});
     } catch (error) {
         console.log(error);

@@ -2,34 +2,40 @@ const express = require("express");
 const router = express.Router();
 const cartService = require('../../services/cart.service');
 const bookService = require('../../services/book.service');
-
+const _ = require('lodash');
+const helperService = require('../../services/helper.service');
 
 router.get('/', async (req, res, next) => {
   try {
     let user = req.cookies["user"];
-    if (user == undefined) res.render('admin/error500', { layout: 'customer-main' })
+    if (user == undefined) res.render('customer/error401', { layout: 'customer-main' })
     else {
-      const yourCart = await cartService.getCart(user.id);
-      listProductsJson = JSON.parse(yourCart.products);
-
       let products = [];
+      let subTotal = 0;
 
-      var subTotal = 0;
+      const yourCart = await cartService.getCart(user.id);
+      if (!yourCart) {
+        return res.render('customer/cart', { user, products, subTotal });
+      }
+      
+      const cartQuantity = await cartService.getCartQuantity(user.id);
+      listProductsJson = JSON.parse(yourCart.products);
 
       for(let i =0; i<listProductsJson.length; i++){
         let obj = listProductsJson[i];
         let product = await bookService.getBookById(obj.book_id);
-        console.log(product);
         products.push(product);
         products[i].quantity = obj.quantity;
         products[i].total = parseInt(obj.quantity) * Math.trunc(parseInt(products[i].price));
         subTotal += products[i].total;
       }
-      res.render('customer/cart', { user, layout: 'customer-main', products, subTotal });
+      subTotal = helperService.formatPrice(subTotal);
+      products = helperService.formatProducts(products);
+      res.render('customer/cart', { user, layout: 'customer-main', products, subTotal, cartQuantity });
     }
   } catch (error) {
     console.log(error);
-    res.status(500).send(error);
+    res.render('/customer/error500');
   }
 })
 

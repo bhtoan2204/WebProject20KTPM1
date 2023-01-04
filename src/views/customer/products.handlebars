@@ -102,20 +102,20 @@
           <nav aria-label="Page navigation">
             <ul class="pagination justify-content-center mb-3">
               {{#if pagination_info.has_previous_page}}
-              <button class="page-item" value="{{pagination_info.previous_page}}" onclick="paginate(this.value)">
+              <button class="btn page-item p-0 m-0" value="{{pagination_info.previous_page}}" onclick="paginate(this.value)">
                 <a class="page-link">Next</a></button>
               {{else}}
-              <button class="page-item disabled"><a href="" class="page-link">Previous</a></button>
+              <button class="btn page-item disabled p-0 m-0"><a href="" class="page-link">Previous</a></button>
               {{/if}}
               {{#forloop pagination_info.first_page pagination_info.last_page 1 originalUrl}}
-              <button class="page-item" value="{{@index}}" onclick="paginate(this.value)">
+              <button class="btn page-item p-0 m-0" value="{{@index}}" onclick="paginate(this.value)">
                 <a class="page-link">{{@index}}</a></button>
               {{/forloop}}
               {{#if pagination_info.has_next_page}}
-              <button class="page-item" value="{{pagination_info.next_page}}" onclick="paginate(this.value)">
+              <button class="btn page-item p-0 m-0" value="{{pagination_info.next_page}}" onclick="paginate(this.value)">
                 <a class="page-link">Next</a></button>
               {{else}}
-              <button class="page-item disabled"><a href="" class="page-link">Next</a></button>
+              <button class="btn page-item disabled p-0 m-0"><a href="" class="page-link">Next</a></button>
               {{/if}}
             </ul>
           </nav>

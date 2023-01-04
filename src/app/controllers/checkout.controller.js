@@ -8,7 +8,7 @@ const orderItemListService = require('../../services/order_item_lists.service');
 router.post('/', async (req, res) => {
     try {
         let user = req.cookies["user"];
-        if (user == undefined) res.render('admin/error500', { layout: 'customer-main' })
+        if (user == undefined) res.render('customer/401', { layout: 'customer-main' })
         else {
             const address = req.body.fname + ", " + req.body.ward + ", " + req.body.district + ", " + req.body.city;
             if (user != null) {
@@ -37,7 +37,7 @@ router.post('/', async (req, res) => {
     }
     catch (error) {
         console.log(error);
-        res.render('admin/error401')
+        res.render('customer/error401')
     }
 })
 

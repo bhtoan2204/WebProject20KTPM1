@@ -2,16 +2,7 @@ const Book = require('../models/book.model');
 const db = require('../config/database');
 const { $or } = require('../config/operatorAlias');
 const _ = require('lodash');
-
-function formatPrice(price) {
-  return price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
-}
-
-function formatBooks(books) {
-  return _.isArray(books)?books.map(book => {
-    return { ...book, price: formatPrice(book.price)}
-  }):{...books, price: formatPrice(books.price)};
-}
+const helperService = require('./helper.service');
 
 const bookService = {
   getAllBooks: () => {
@@ -71,7 +62,7 @@ const bookService = {
   searchBookByLimit: (query, startingLimit, resultPerPage) => {
     return new Promise(async (resolve, reject) => {
       try {
-        const books = formatBooks(await Book.findAll({
+        const books = helperService.formatBooks(await Book.findAll({
           offset: startingLimit,
           limit: resultPerPage,
           where: {
@@ -100,7 +91,7 @@ const bookService = {
   getBooksByCategoryId: (categoryId) => {
     return new Promise(async (resolve, reject) => {
       try {
-        const books = formatBooks(await Book.findAll({
+        const books = helperService.formatBooks(await Book.findAll({
           where: {
             categoryId: {
               $eq: categoryId
@@ -131,7 +122,7 @@ const bookService = {
     return new Promise(async (resolve, reject) => {
       try {
         if (query.sort == 'asc') {
-          const books = formatBooks(await Book.findAll({
+          const books = helperService.formatBooks(await Book.findAll({
             offset: startingLimit, limit: resultPerPage,
             where: {
               $and: [
@@ -155,7 +146,7 @@ const bookService = {
           return resolve(books);
         }
         else if (query.sort == 'desc') {
-          const books = formatBooks(await Book.findAll({
+          const books = helperService.formatBooks(await Book.findAll({
             offset: startingLimit, limit: resultPerPage,
             where: {
               $and: [
@@ -179,7 +170,7 @@ const bookService = {
           return resolve(books);
         }
         else {
-          const books = formatBooks(await Book.findAll({
+          const books = helperService.formatBooks(await Book.findAll({
             offset: startingLimit, limit: resultPerPage,
             where: {
               $and: [

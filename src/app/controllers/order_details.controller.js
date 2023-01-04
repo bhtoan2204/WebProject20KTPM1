@@ -9,7 +9,7 @@ router.get('/:idorder', async (req, res) => {
     try {
         const idorder = req.params.idorder;
         let user = req.cookies["user"];
-        if (user == undefined) res.render('admin/error500', { layout: 'customer-main' })
+        if (user == undefined) res.render('customer/error500', { layout: 'customer-main' })
         else {
             const order = await orderService.getById(idorder);
             order["progress"] = (order.status - 1) * 50;
