@@ -126,3 +126,13 @@ const validate = () => {
 }
 
 $('#email').on('input', validate);
+
+$('#newPass, #confirmPass').on('keyup', function () {
+    if ($('#newPass').val() == $('#confirmPass').val()) {
+        $('#message').html('Matching').css('color', 'green');
+        $('#changePassBtn').prop('disabled', false);
+    } else {
+        $('#message').html('Not Matching').css('color', 'red');
+        $('#changePassBtn').prop('disabled', true);
+    }
+  });

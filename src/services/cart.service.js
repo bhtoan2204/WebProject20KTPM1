@@ -19,6 +19,27 @@ const cartService = {
             }
         })
     },
+    getCartQuantity: (id) => {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const cart = await Cart.findOne({
+                    where: {
+                        userId: { $eq: id }
+                    },
+                    raw: true
+                });
+                const products = JSON.parse(cart.products);
+                const quantity = products.reduce((acc, value) => {
+                    return acc + Number(value.quantity);
+                }, 0);
+                return resolve(quantity);
+            }
+            catch (err) {
+                return reject(err);
+            }
+        })
+    },
+
     createNewCart:(id, productsString) =>{
         return new Promise(async (resolve, reject)=>{
             try{

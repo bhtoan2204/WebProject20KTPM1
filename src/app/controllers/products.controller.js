@@ -5,9 +5,12 @@ const bookService = require('../../services/book.service');
 const qs = require('qs');
 const categoryService = require("../../services/category.service");
 var Paginator = require("paginator");
+const cartService = require("../../services/cart.service");
 const limit = 6;
 
 router.get('/', async (req, res, next) => {
+    let user = req.cookies["user"];
+    const cartQuantity = user ? await cartService.getCartQuantity(user.id) : 0;
     try {
         const { sort: sortFilter } = req.query;
         const pageAsNum = req.query.page ? Number(req.query.page[1]) : 1;
@@ -41,11 +44,10 @@ router.get('/', async (req, res, next) => {
         console.log(req.query.page[1]);
         //console.log(products);
         //console.log(products);
-        let user = req.cookies["user"];
-        res.render('customer/products', { user, pagination_info, products, categories });
+        res.render('customer/products', { user, pagination_info, products, categories, cartQuantity });
     } catch (error) {
         console.log(error);
-        res.render('admin/error401')
+        res.render('customer/error500', { user, categories, cartQuantity });
     }
 });
 
