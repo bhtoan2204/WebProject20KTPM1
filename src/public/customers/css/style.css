@@ -9623,8 +9623,11 @@ a.text-dark:hover, a.text-dark:focus {
     width: 200px;
     height: 200px;
   }
+<<<<<<< HEAD
+=======
 }
 
 #leaveReview i {
   cursor: pointer;
+>>>>>>> 81a9c9b1ecc78d8747a73b0cda25629faecbac81
 }
