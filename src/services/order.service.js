@@ -191,6 +191,20 @@ const orderService = {
                 return reject(err);
             }
         })
+    },
+    deleteOrderById: (id) => {
+        return new Promise((resolve, reject) => {
+            try {
+                const result = Order.destroy({
+                    where: {
+                        id: id
+                    }
+                });
+                return resolve(result);
+            } catch (error) {
+                return reject(error);
+            }
+        })
     }
 }
 

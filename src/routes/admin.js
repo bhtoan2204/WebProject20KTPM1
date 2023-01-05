@@ -2,12 +2,13 @@ const express = require('express')
 
 const router = express.Router();
 
-const adminController = require('../app/controllers/adminController');
-const listordersController = require('../app/controllers/listorders.controller');
-const orderdetailsController = require('../app/controllers/orderdetails.controller');
-const accountDetail = require('../app/controllers/accountdetails.controller')
-const chartController = require('../app/controllers/chart.controller')
-const banDetail = require('../app/controllers/ban_unban')
+const adminController = require('../app/controllers/admin/adminController');
+const listordersController = require('../app/controllers/admin/listorders.controller');
+const orderdetailsController = require('../app/controllers/admin/orderdetails.controller');
+const accountDetail = require('../app/controllers/admin/accountdetails.controller');
+const chartController = require('../app/controllers/admin/chart.controller');
+const banDetail = require('../app/controllers/admin/ban_unban');
+const productController = require('../app/controllers/admin/product.controller');
 
 router.use('/chart', chartController);
 router.use('/home', adminController.home);
@@ -22,8 +23,9 @@ router.use('/login', adminController.login);
 router.use('/logout', adminController.logout);
 router.use('/listorders', listordersController);
 router.use('/orderdetails', orderdetailsController);
-router.use('/accountdetail', accountDetail)
-router.use('/bandetail', banDetail)
+router.use('/accountdetail', accountDetail);
+router.use('/bandetail', banDetail);
+router.use('/product', productController);
 
 module.exports = router;
 

@@ -1,10 +1,10 @@
 const express = require("express");
 
 const router = express.Router();
-const userService = require('../../services/user.service');
+const userService = require('../../../services/user.service');
 const bcrypt = require('bcryptjs')
 const { uuid } = require('uuidv4');
-const categoryService = require("../../services/category.service");
+const categoryService = require("../../../services/category.service");
 
 const validateEmail = (email) => {
     return email.match(

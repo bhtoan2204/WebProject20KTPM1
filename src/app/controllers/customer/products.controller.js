@@ -1,13 +1,13 @@
 const express = require("express");
 
 const router = express.Router();
-const bookService = require('../../services/book.service');
+const bookService = require('../../../services/book.service');
 const qs = require('qs');
-const categoryService = require("../../services/category.service");
+const categoryService = require("../../../services/category.service");
 var Paginator = require("paginator");
-const cartService = require("../../services/cart.service");
-const helperService = require("../../services/helper.service");
-const orderService = require("../../services/order.service");
+const cartService = require("../../../services/cart.service");
+const helperService = require("../../../services/helper.service");
+const orderService = require("../../../services/order.service");
 const limit = 6;
 
 router.get('/', async (req, res, next) => {

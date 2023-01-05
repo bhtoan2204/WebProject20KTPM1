@@ -1,13 +1,13 @@
 const express = require("express");
-const categoryService = require("../../services/category.service");
-const userService = require("../../services/user.service");
+const categoryService = require("../../../services/category.service");
+const userService = require("../../../services/user.service");
 const _ = require('lodash');
-const fileService = require('../../services/file.service');
+const fileService = require('../../../services/file.service');
 const path = require("path");
 const appRoot = require('app-root-path');
 const bcrypt = require('bcryptjs');
-const cartService = require("../../services/cart.service");
-const orderService = require("../../services/order.service");
+const cartService = require("../../../services/cart.service");
+const orderService = require("../../../services/order.service");
 
 const router = express.Router();
 
