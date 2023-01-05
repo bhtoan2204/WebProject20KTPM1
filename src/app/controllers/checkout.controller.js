@@ -4,6 +4,7 @@ const cartService = require('../../services/cart.service');
 const bookService = require('../../services/book.service');
 const orderService = require('../../services/order.service');
 const orderItemListService = require('../../services/order_item_lists.service');
+const helperService = require("../../services/helper.service");
 
 router.post('/', async (req, res) => {
     try {
@@ -15,7 +16,7 @@ router.post('/', async (req, res) => {
                 const myCart = await cartService.getCart(user.id);
                 listProductsJson = JSON.parse(myCart.products);
                 let products = [];
-                subTotal = 0;
+                let subTotal = 0;
                 for (var i = 0; i < listProductsJson.length; i++) {
                     var obj = listProductsJson[i];
                     for (var key in obj) {
@@ -31,6 +32,8 @@ router.post('/', async (req, res) => {
                         }
                     }
                 }
+                products = helperService.formatProducts(products);
+                subTotal = helperService.formatPrice(subTotal);
                 res.render('customer/checkout', { user, products, subTotal, address });
             }
         }
