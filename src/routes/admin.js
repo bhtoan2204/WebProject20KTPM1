@@ -6,9 +6,10 @@ const adminController = require('../app/controllers/adminController');
 const listordersController = require('../app/controllers/listorders.controller');
 const orderdetailsController = require('../app/controllers/orderdetails.controller');
 const accountDetail = require('../app/controllers/accountdetails.controller')
+const chartController = require('../app/controllers/chart.controller')
 const banDetail = require('../app/controllers/ban_unban')
 
-router.use('/chart', adminController.chart);
+router.use('/chart', chartController);
 router.use('/home', adminController.home);
 router.use('/table', adminController.table);
 router.use('/table_account', adminController.table_account)
