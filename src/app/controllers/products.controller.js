@@ -47,6 +47,7 @@ router.get('/', async (req, res, next) => {
         if (pagination_info.total_pages < 2) {
             pagination_info = null;
         }
+        products = helperService.formatBooks(products);
         res.render('customer/products', { user, pagination_info, products, categories, cartQuantity, orders });
     } catch (error) {
         console.log(error);

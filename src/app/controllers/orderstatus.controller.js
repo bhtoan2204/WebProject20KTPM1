@@ -6,7 +6,7 @@ const orderService = require('../../services/order.service');
 
 router.get('/', async (req, res, next) => {
     let user = req.cookies["user"];
-    if (!user) res.render('customer/error401', { layout: 'customer-main' });
+    if (!user) return res.render('customer/error401', { layout: 'customer-main' });
     const cartQuantity = user ? await cartService.getCartQuantity(user.id) : 0;
     try {
         var orderList = []

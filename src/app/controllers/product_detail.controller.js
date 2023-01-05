@@ -51,9 +51,10 @@ router.get("/:id", async (req, res, next) => {
       starLeft: 5 - book.overallRating,
     });
     const categories = await categoryService.getAllCategories();
-    const relatedBooks = await bookService.getBooksByCategoryId(
+    const relatedBooks = helperService.formatBooks(await bookService.getBooksByCategoryId(
       book.categoryId
-    );
+    ));
+    console.log('book: ', book);
     res.render("customer/product_details", {
       user,
       book,

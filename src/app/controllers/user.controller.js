@@ -16,6 +16,7 @@ const router = express.Router();
 router.get('/profile', async (req, res) => {
   const userId = req.cookies['user'].id;
   const cartQuantity = userId ? await cartService.getCartQuantity(userId) : 0;
+  const orders = userId ? await orderService.getOrdersByUserId(userId) : [];
   try {
     const { success } = req.query;
     const categories = await categoryService.getAllCategories();
@@ -24,7 +25,7 @@ router.get('/profile', async (req, res) => {
       content: success=== 'true' ? 'Profile updated' : 'Update failed',
       alert: success=== 'true' ? 'success' : 'danger'
     }
-    return res.render('customer/profile', { user, categories, message, cartQuantity });
+    return res.render('customer/profile', { user, categories, message, cartQuantity, orders });
   } catch (error) {
     console.log(error);
     return res.status(500).send(error);
