@@ -1,8 +1,8 @@
 const express = require("express");
-const bookService = require("../../services/book.service");
+const bookService = require("../../../services/book.service");
 const router = express.Router();
-const reviewService = require('../../services/review.service');
-const userService = require("../../services/user.service");
+const reviewService = require('../../../services/review.service');
+const userService = require("../../../services/user.service");
 
 router.post('/create', async (req, res) => {
   const userId = req.cookies['user']?.id;

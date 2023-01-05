@@ -1,8 +1,8 @@
 const express = require("express");
-const cartService = require("../../services/cart.service");
+const cartService = require("../../../services/cart.service");
 
 const router = express.Router();
-const orderService = require('../../services/order.service');
+const orderService = require('../../../services/order.service');
 
 router.get('/', async (req, res, next) => {
     let user = req.cookies["user"];

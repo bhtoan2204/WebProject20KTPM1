@@ -1,18 +1,18 @@
 const express = require("express");
 
 const router = express.Router();
-const bookService = require("../../services/book.service");
-const categoryService = require("../../services/category.service");
-const authorService = require("../../services/author.service");
-const publisherService = require("../../services/publisher.service");
-const Language = require("../../models/enums/language.enum");
-const cartService = require("../../services/cart.service");
-const helperService = require("../../services/helper.service");
-const userService = require("../../services/user.service");
-const reviewService = require("../../services/review.service");
+const bookService = require("../../../services/book.service");
+const categoryService = require("../../../services/category.service");
+const authorService = require("../../../services/author.service");
+const publisherService = require("../../../services/publisher.service");
+const Language = require("../../../models/enums/language.enum");
+const cartService = require("../../../services/cart.service");
+const helperService = require("../../../services/helper.service");
+const userService = require("../../../services/user.service");
+const reviewService = require("../../../services/review.service");
 const _ = require("lodash");
 const moment = require('moment');
-const orderService = require("../../services/order.service");
+const orderService = require("../../../services/order.service");
 
 router.get("/:id", async (req, res, next) => {
   const userId = req.cookies["user"]?.id;
@@ -54,6 +54,7 @@ router.get("/:id", async (req, res, next) => {
     const relatedBooks = helperService.formatBooks(await bookService.getBooksByCategoryId(
       book.categoryId
     ));
+    console.log('book: ', book);
     res.render("customer/product_details", {
       user,
       book,

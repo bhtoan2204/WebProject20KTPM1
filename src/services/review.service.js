@@ -27,6 +27,20 @@ const reviewService = {
         return reject(error);
       }
     })
+  },
+
+  deleteReviewByBookId: (bookId) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const result = await Review.destroy({
+          where: {
+            bookId: bookId
+          }
+        })
+      } catch (error) {
+        return reject(error);
+      }
+    })
   }
 }
 

@@ -384,6 +384,31 @@ const bookService = {
         return reject(error);
       }
     })
+  },
+  deleteBookById: (bookId) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        const result = await Book.destroy({
+          where: {
+          id: bookId
+        }
+        });
+        return resolve(result);
+      } catch (error) {
+        return reject(error);
+      }
+    })
+  },
+  createBook: (data) => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        await Book.sync();
+        const result = await Book.create(data);
+        return resolve(result);
+      } catch (error) {
+        return reject(error);
+      }
+    })
   }
 }
 

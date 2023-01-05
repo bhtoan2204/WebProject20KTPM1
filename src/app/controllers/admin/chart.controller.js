@@ -8,10 +8,10 @@ const curDate6 = new Date(new Date().setDate(new Date().getDate() - 6));
 
 const express = require("express");
 const { Sequelize } = require("sequelize");
-const bookService = require("../../services/book.service");
+const bookService = require("../../../services/book.service");
 const router = express.Router();
-const orderService = require('../../services/order.service');
-const orderItemListService = require("../../services/order_item_lists.service");
+const orderService = require('../../../services/order.service');
+const orderItemListService = require("../../../services/order_item_lists.service");
 
 
 const curMonth = new Date();
