@@ -139,7 +139,12 @@ router.get('/', async (req, res, next) => {
 
     console.log(revenue);
 
-    res.render('admin/chart', {layout: 'admin-main', revenue, totalRevenue, totalRevenueMonth, listBook})
+    res.render('admin/chart',   {layout: 'admin-main', 
+                                revenue, 
+                                totalRevenue, 
+                                totalRevenueMonth, 
+                                listBook,
+                                admin: req.cookies.admin})
 });
 
 module.exports = router;

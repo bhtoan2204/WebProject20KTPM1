@@ -11,9 +11,13 @@ class adminController{
         else
             res.redirect('/admin/login');
     }
-    home(req, res){
-        if(req.cookies.admin != null)
-            res.render('admin/home', {layout: 'admin-main', admin: req.cookies.admin});
+    async home(req, res){
+        if(req.cookies.admin != null) {
+            const order = await bookService.getAllBooks()
+            res.render('admin/home', {layout: 'admin-main', 
+                                      admin: req.cookies.admin,
+                                      order});
+        }            
         else
             res.redirect('/admin/login');
         
