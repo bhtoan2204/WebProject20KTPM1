@@ -61,6 +61,18 @@ const categoryService = {
         return reject(error);
       }
     })
+  },
+  deleteCategory: (idCat)=>{
+    return new Promise(async (resolve, reject) => {
+      try {
+        const categories = Category.destroy(
+          { where: {id: idCat}
+        });
+        return resolve(categories);
+      } catch (error) {
+        return reject(error);
+      }
+    })
   }
 }
 

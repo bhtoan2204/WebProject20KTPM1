@@ -54,6 +54,19 @@ const publisherService = {
         return reject(error);
       }
     })
+  },
+  deletePublisher: (pubId) =>{
+    return new Promise(async (resolve, reject) => {
+      try {
+        const publisher = Publisher.destroy(
+          {
+            where: { id: pubId },
+          });
+        return resolve(publisher);
+      } catch (error) {
+        return reject(error);
+      }
+    })
   }
 }
 
