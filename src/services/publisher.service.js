@@ -28,7 +28,32 @@ const publisherService = {
         return reject(error);
       }
     })
-
+  },
+  createNewPublisher: (pubName) =>{
+    return new Promise(async (resolve, reject) => {
+      try {
+        const publisher = Publisher.create({ name: pubName});
+        return resolve(publisher);
+      } catch (error) {
+        return reject(error);
+      }
+    })
+  },
+  UpdatePublisher: (pubName, pubId) =>{
+    return new Promise(async (resolve, reject) => {
+      try {
+        const publisher = Publisher.update(
+          {
+            name: pubName,
+          },
+          {
+            where: { id: pubId },
+          });
+        return resolve(publisher);
+      } catch (error) {
+        return reject(error);
+      }
+    })
   }
 }
 
