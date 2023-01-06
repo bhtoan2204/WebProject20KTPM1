@@ -7,6 +7,14 @@
                     <li class="breadcrumb-item"><a href="dashboard">Dashboard</a></li>
                     <li class="breadcrumb-item active">Tables</li>
                 </ol>
+                {{#if message}}
+                {{#with message}}
+                <div class="alert alert-{{alert}} fade show">
+                    <button type="button" class="close" data-dismiss="alert">×</button>
+                    {{content}}
+                </div>
+                {{/with}}
+                {{/if}}
                 <!-- Button trigger modal -->
                 <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#newProduct">
                     Add new Publisher
@@ -57,6 +65,7 @@
                                     <th>Author ID</th>
                                     <th>Publisher name</th>
                                     <th>Rename</th>
+                                    <th>Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -66,12 +75,19 @@
                                     <td>{{name}}</td>
                                     <td>
                                         <form action="/admin/table_publishers/update" method="post" id="updatePub">
-                                            <input type="hidden" name ="id" value="{{id}}">
-                                            <input type="text" name="name" value="{{name}}" placeholder="Update name of the publisher" required>
-                                            
+                                            <input type="hidden" name="id" value="{{id}}">
+                                            <input type="text" name="name" value="{{name}}"
+                                                placeholder="Update name of the publisher" required>
+
                                         </form>
                                         <br>
                                         <button type="submit" form="updatePub" class="btn btn-primary">Update</button>
+                                    </td>
+                                    <td>
+                                        <form action="/admin/table_publishers/delete" method="post" id="deleteAu">
+                                            <input type="hidden" name="id" value="{{id}}">
+                                            <button type="submit" class="btn btn-warning">Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                                 {{/each}}

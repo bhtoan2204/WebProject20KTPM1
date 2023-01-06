@@ -56,6 +56,19 @@ const authorService = {
         return reject(error);
       } 
     })
+  },
+  deleteAuthor: (authorId) =>{
+    return new Promise(async (resolve, reject) => {
+      try {
+        const author = Author.destroy(
+          {
+            where: { id: authorId },
+          });
+        return resolve(author);
+      } catch (error) {
+        return reject(error);
+      } 
+    })
   }
 }
 
