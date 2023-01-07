@@ -33,7 +33,6 @@ router.post('/', async (req, res) => {
                     }
                 }
                 products = helperService.formatProducts(products);
-                subTotal = helperService.formatPrice(subTotal);
                 res.render('customer/checkout', { user, products, subTotal, address });
             }
         }
@@ -59,7 +58,7 @@ router.post('/create_order', async (req, res) => {
     }
     catch (error) {
         console.log(error);
-        res.render('admin/error401')
+        res.render('customer/error401')
     }
 });
 
