@@ -51,7 +51,7 @@ router.get('/', async (req, res, next) => {
         res.render('customer/products', { user, pagination_info, products, categories, cartQuantity, orders });
     } catch (error) {
         console.log(error);
-        res.render('customer/error500', { user, categories, cartQuantity, orders });
+        res.render('customer/error500');
     }
 });
 

@@ -1,8 +1,5 @@
 const Book = require('../models/book.model');
 const db = require('../config/database');
-const { $or } = require('../config/operatorAlias');
-const _ = require('lodash');
-const helperService = require('./helper.service');
 
 const bookService = {
   getAllBooks: () => {
@@ -41,7 +38,7 @@ const bookService = {
             $and: [
               {
                 title: {
-                  $iLike: `%${query.name}%`
+                  $substring: `${query.name}`
                 }
               },
               {
@@ -79,7 +76,7 @@ const bookService = {
             $and: [
               {
                 title: {
-                  $iLike: `%${query.name}%`
+                  $substring: `${query.name}`
                 }
               },
               {
@@ -148,7 +145,7 @@ const bookService = {
               $and: [
                 {
                   title: {
-                    $iLike: `%${query.name}%`
+                    $substring: `${query.name}`
                   }
                 },
                 {
@@ -257,7 +254,7 @@ const bookService = {
               $and: [
                 {
                   title: {
-                    $iLike: `%${query.name}%`
+                    $substring: `${query.name}`
                   }
                 },
                 {
