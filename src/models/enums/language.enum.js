@@ -1,7 +1,8 @@
 const Language = {
   en: 'English',
   vi: 'Vietnamese',
-  cn: 'Chinese'
+  cn: 'Chinese',
+  jp: 'Japanese'
 };
 
 module.exports = Language;
